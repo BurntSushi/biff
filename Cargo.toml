@@ -1,0 +1,111 @@
+[package]
+publish = false
+name = "biff-datetime-cli"
+version = "0.0.1"
+authors = ["Andrew Gallant <jamslam@gmail.com>"]
+description = """
+A command-line utility for doing datetime arithmetic, parsing and formatting.
+
+A non-exhaustive list of features:
+
+* Generate sequences of datetimes using RFC 5545 recurrence rules.
+* Perform calendar and absolute duration arithmetic interchangeably in a way
+  that is safe with respect to daylight saving time.
+* IANA time zone database support.
+* The ability to tag arbitrary data in a JSON lines format with datetimes.
+  This works great for reformatting or localizing timestamps in log files.
+* Datetimes can be written in a variety of flexible formats. For example,
+  `biff time fmt '5pm last thursday'`.
+* Compare and sort datetimes.
+"""
+repository = "https://github.com/BurntSushi/biff"
+keywords = ["date", "time", "jiff", "zone", "calendar"]
+categories = ["command-line-utilities", "date-and-time"]
+license = "Unlicense OR MIT"
+edition = "2024"
+rust-version = "1.85"
+autotests = false
+exclude = [
+  "/.github/",
+]
+
+[[bin]]
+name = "biff"
+path = "src/main.rs"
+
+[features]
+locale = [
+  "dep:icu_calendar",
+  "dep:icu_datetime",
+  "dep:icu_locale",
+  "dep:icu_time",
+  "dep:jiff-icu",
+  "dep:writeable",
+]
+
+[dependencies]
+anstyle = "1.0.10"
+anyhow = "1.0.97"
+bstr = { version = "1.11.3", default-features = false, features = ["serde", "std"] }
+flume = { version = "0.11.1", default-features = false }
+icu_calendar = { version = "2.0.0", optional = true, features = ["logging"] }
+icu_datetime = { version = "2.0.0", optional = true, features = ["logging"] }
+icu_locale = { version = "2.0.0", optional = true }
+icu_time = { version = "2.0.0", optional = true }
+jiff = { version = "0.2.11", features = ["logging", "serde", "tzdb-bundle-always"] }
+jiff-icu = { version = "0.2.0", optional = true }
+lexopt = "0.3.0"
+log = { version = "0.4.26", features = ["std"] }
+memmap2 = "0.9.5"
+regex = "1.11.1"
+regex-syntax = "0.8.5"
+serde = "1.0.219"
+serde_json = "1.0.140"
+textwrap = { version = "0.16.2", default-features = false }
+writeable = { version = "0.6.1", optional = true }
+
+[dependencies.regex-automata]
+version = "0.4.9"
+default-features = false
+# These are the default features of `regex-automata` minus `dfa-build` and
+# `dfa-search` (as of 2025-03-15). The reason is that this takes away a fair
+# chunk of code in `regex-automata` that *probably* doesn't help us too much,
+# although I haven't done any benchmarking. It might be worth experimenting
+# with, in which case, I'd generally be okay bringing it in.
+#
+# The `regex` crate itself also has this same configuration.
+features = [
+  "std",
+  "syntax",
+  "perf",
+  "unicode",
+  "meta",
+  "nfa",
+  "dfa-onepass",
+  "hybrid",
+  "logging",
+]
+
+[dev-dependencies]
+insta = { version = "1.42.2", features = ["filters", "serde"] }
+serde = { version = "1.0.219", features = ["derive"] }
+tempfile = "3.19.1"
+
+[profile.release]
+debug = true
+
+[profile.release-lto]
+inherits = "release"
+opt-level = 3
+debug = "none"
+strip = "symbols"
+debug-assertions = false
+overflow-checks = false
+lto = "fat"
+panic = "abort"
+incremental = false
+codegen-units = 1
+
+[[test]]
+name = "integration"
+path = "tests/lib.rs"
