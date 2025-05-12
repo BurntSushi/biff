@@ -1043,7 +1043,7 @@ support enabled:
 
 ```console
 $ biff --version
-Biff 0.0.1 (rev 7766556b20) (locale support enabled)
+Biff 0.1.0 (rev 2659045dba) (locale support enabled)
 ```
 
 If you don't see "locale support enabled" in the output, then that means your
