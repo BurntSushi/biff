@@ -193,7 +193,6 @@ jobs:
       if: env.CARGO == 'cross'
       shell: bash
       run: |
-        ls -lRa ./target
         docker run --rm -v \
           "$PWD/target:/target:Z" \
           "ghcr.io/cross-rs/${{ matrix.target }}:main" \
