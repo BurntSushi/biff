@@ -213,14 +213,6 @@ enabled:
 cargo install biff-datetime-cli --features locale
 ```
 
-Alternatively, one can use
-[`cargo binstall`](https://github.com/cargo-bins/cargo-binstall)
-to install a Biff binary directly from GitHub:
-
-```console
-cargo binstall biff-datetime-cli
-```
-
 ### Biff as a library
 
 There is relatively little datetime logic inside of Biff proper.
