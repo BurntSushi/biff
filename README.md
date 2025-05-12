@@ -221,6 +221,15 @@ to install a Biff binary directly from GitHub:
 cargo binstall biff-datetime-cli
 ```
 
+### Biff as a library
+
+There is relatively little datetime logic inside of Biff proper.
+(Except for its RFC 5545 implementation, which may eventually move
+out to a library.) Most of the datetime logic is instead provided by
+[Jiff](https://github.com/BurntSushi/jiff). Additionally, localization is
+provided by [ICU4X](https://docs.rs/icu) and integrated with Jiff via
+[jiff-icu](https://docs.rs/jiff-icu).
+
 ### WARNING
 
 I may ship arbitrary and capricious breaking changes at this point. You have
