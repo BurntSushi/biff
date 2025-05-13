@@ -29,6 +29,12 @@ $ biff
 Sat, May 10, 2025, 8:02:04 AM EDT
 ```
 
+> [!TIP]
+> If you get output like `2025 M05 12, Mon 15:48:15` instead, that's because
+> you like don't have [locale support][locale] support configured. That
+> requires setting `BIFF_LOCALE` and using a release binary or building Biff
+> with the `locale` feature enabled.
+
 Print the current time in a format of your choosing:
 
 ```console
