@@ -7,8 +7,8 @@ fn main() {
 ///
 /// The main reason for this is to enable long path support on Windows. This
 /// still, I believe, requires enabling long path support in the registry. But
-/// if that's enabled, then this will let ripgrep use C:\... style paths that
-/// are longer than 260 characters.
+/// if that's enabled, then this will let biff use C:\... style paths that are
+/// longer than 260 characters.
 fn set_windows_exe_options() {
     static MANIFEST: &str = "pkg/windows/Manifest.xml";
 
@@ -32,7 +32,7 @@ fn set_windows_exe_options() {
 }
 
 /// Make the current git hash available to the build as the environment
-/// variable `RIPGREP_BUILD_GIT_HASH`.
+/// variable `BIFF_BUILD_GIT_HASH`.
 fn set_git_revision_hash() {
     use std::process::Command;
 
