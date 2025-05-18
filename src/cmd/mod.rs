@@ -22,16 +22,21 @@ pub fn run(p: &mut lexopt::Parser) -> anyhow::Result<()> {
     // For convenience, running `biff` with no arguments prints the current
     // time in a somewhat nice format (roughly matches `date` on my system).
     if p.try_raw_args().map_or(false, |args| args.as_slice().is_empty()) {
-        use jiff::fmt::{StdIoWrite, strtime};
+        use crate::{args::flags::Format, datetime::DateTime};
         use std::io::Write;
 
-        let tm = strtime::BrokenDownTime::from(&*crate::NOW);
-        tm.format_with_config(
-            &crate::locale::jiff_strtime_config()?,
-            "%c",
-            &mut StdIoWrite(std::io::stdout()),
-        )?;
-        writeln!(std::io::stdout())?;
+        // Instead of just making a `BrokenDownTime` from `Zoned`
+        // and calling the formatting API directly, we specifically
+        // allow for a `String` allocation here and reuse our existing
+        // strftime API to avoid creating multiple copies of the
+        // (rather large) `strftime` formatting routine inside of
+        // Jiff. (Inside of Jiff, it's generic over the destination
+        // `jiff::fmt::Write` impl.)
+        let fmt = Format::Strtime("%c".into());
+        let config = crate::locale::jiff_strtime_config()?;
+        let now = DateTime::from(crate::NOW.clone());
+        writeln!(std::io::stdout(), "{}", fmt.format(&config, &now)?)?;
+
         return Ok(());
     }
 
