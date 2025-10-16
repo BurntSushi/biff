@@ -157,7 +157,7 @@ fn collect_usage_for_flags<'a>(
 /// means `P` can't be used as a short flag either.
 ///
 /// Ref: https://docs.rs/lexopt/latest/lexopt/struct.Parser.html#method.try_raw_args
-fn parse_dash_number(parser: &mut Parser) -> Option<Arg> {
+fn parse_dash_number(parser: &mut Parser) -> Option<Arg<'_>> {
     parser
         .try_raw_args()?
         .next_if(|arg| {

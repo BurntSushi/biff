@@ -98,7 +98,7 @@ impl TimeSpanRound {
         Ok(rounded.into())
     }
 
-    fn options(&self) -> jiff::SpanRound {
+    fn options(&self) -> jiff::SpanRound<'_> {
         let mut options = jiff::SpanRound::new()
             .smallest(self.smallest.get())
             .mode(self.mode.get())
@@ -185,7 +185,7 @@ impl TimeSpanBalance {
         Ok(balanced.into())
     }
 
-    fn options(&self) -> jiff::SpanRound {
+    fn options(&self) -> jiff::SpanRound<'_> {
         jiff::SpanRound::new()
             .largest(self.largest.get())
             .relative(self.relative.get())
