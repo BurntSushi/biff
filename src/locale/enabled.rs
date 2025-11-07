@@ -20,7 +20,7 @@ use {
         preferences::HourCycle,
     },
     icu_locale::Locale as IcuLocale,
-    icu_time::{Time, TimeZoneInfo, ZonedDateTime, zone::models::Full},
+    icu_time::{Time, TimeZoneInfo, ZonedDateTime, zone::models::AtTime},
 };
 
 /// A wrapper around an ICU4X locale to create a locale formatter.
@@ -97,7 +97,7 @@ impl Custom for StrtimeLocaleFormatter {
         wtr: &mut W,
     ) -> Result<(), jiff::Error> {
         let zdt = tm.to_zoned()?;
-        let zdt: ZonedDateTime<Iso, TimeZoneInfo<Full>> =
+        let zdt: ZonedDateTime<Iso, TimeZoneInfo<AtTime>> =
             (&zdt).convert_into();
         self.datetime
             .format(&zdt)
