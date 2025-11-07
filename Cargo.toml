@@ -1,6 +1,6 @@
 [package]
 name = "biff-datetime-cli"
-version = "0.1.0"
+version = "0.1.0" #:version
 authors = ["Andrew Gallant <jamslam@gmail.com>"]
 description = """
 A command-line utility for doing datetime arithmetic, parsing and formatting.
