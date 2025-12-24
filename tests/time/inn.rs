@@ -91,7 +91,7 @@ fn invalid_time_zone() {
     ----- stdout -----
 
     ----- stderr -----
-    parsed apparent IANA time zone identifier Australia/Syydney from Australia/Syydney, but the tzdb lookup failed: failed to find time zone `Australia/Syydney` in time zone database
+    parsed apparent IANA time zone identifier, but the tzdb lookup failed: failed to find time zone `Australia/Syydney` in time zone database
     ",
     );
 
@@ -103,7 +103,7 @@ fn invalid_time_zone() {
     ----- stdout -----
 
     ----- stderr -----
-    parsed apparent IANA time zone identifier Isreal from Isreal, but the tzdb lookup failed: failed to find time zone `Isreal` in time zone database
+    parsed apparent IANA time zone identifier, but the tzdb lookup failed: failed to find time zone `Isreal` in time zone database
     ",
     );
 
@@ -122,14 +122,14 @@ fn invalid_time_zone() {
 
     assert_cmd_snapshot!(
         inn().arg("+27:00").arg("now"),
-        @r#"
+        @r"
     success: false
     exit_code: 1
     ----- stdout -----
 
     ----- stderr -----
-    failed to parse hours in UTC numeric offset "+27:00": offset hours are not valid: parameter 'hours' with value 27 is not in the required range of 0..=25
-    "#,
+    failed to parse hours in UTC numeric offset: hour in time zone offset is out of range: parameter 'hours' with value 27 is not in the required range of 0..=25
+    ",
     );
 }
 

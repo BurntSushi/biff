@@ -190,7 +190,7 @@ fn errors() {
     ----- stdout -----
 
     ----- stderr -----
-    datetime rounding does not support years
+    failed rounding datetime: rounding to years is not supported
     ",
     );
     assert_cmd_snapshot!(
@@ -201,7 +201,7 @@ fn errors() {
     ----- stdout -----
 
     ----- stderr -----
-    datetime rounding does not support months
+    failed rounding datetime: rounding to months is not supported
     ",
     );
     assert_cmd_snapshot!(
@@ -212,7 +212,7 @@ fn errors() {
     ----- stdout -----
 
     ----- stderr -----
-    datetime rounding does not support weeks
+    failed rounding datetime: rounding to weeks is not supported
     ",
     );
 
@@ -224,7 +224,7 @@ fn errors() {
     ----- stdout -----
 
     ----- stderr -----
-    increment 2 for rounding datetime to days must be 1) less than 2, 2) divide into it evenly and 3) greater than zero
+    failed rounding datetime: increment for rounding to days must be 1) less than 2, 2) divide into it evenly and 3) greater than zero
     ",
     );
 
@@ -236,7 +236,7 @@ fn errors() {
     ----- stdout -----
 
     ----- stderr -----
-    increment 16 for rounding datetime to minutes must be 1) less than 60, 2) divide into it evenly and 3) greater than zero
+    failed rounding datetime: increment for rounding to minutes must be 1) less than 60, 2) divide into it evenly and 3) greater than zero
     ",
     );
 }
