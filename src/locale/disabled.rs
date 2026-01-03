@@ -7,7 +7,7 @@ impl Locale {
     }
 
     pub fn to_formatter(&self) -> anyhow::Result<StrtimeLocaleFormatter> {
-        Ok(StrtimeLocaleFormatter(()))
+        Ok(jiff::fmt::strtime::DefaultCustom::new())
     }
 }
 
@@ -28,8 +28,4 @@ impl std::fmt::Display for Locale {
     }
 }
 
-#[derive(Debug)]
-pub struct StrtimeLocaleFormatter(());
-
-// This will just use all of Jiff's defaults.
-impl jiff::fmt::strtime::Custom for StrtimeLocaleFormatter {}
+pub type StrtimeLocaleFormatter = jiff::fmt::strtime::DefaultCustom;
