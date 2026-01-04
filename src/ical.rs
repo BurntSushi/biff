@@ -3685,9 +3685,7 @@ mod tests {
             .unwrap();
         insta::assert_snapshot!(
             snapshot(rrule.iter().take_while(|zdt| zdt <= until)),
-            @r"
-        1998-12-25T09:00:00-05:00[America/New_York]
-        ",
+            @"1998-12-25T09:00:00-05:00[America/New_York]",
         );
     }
 
@@ -3734,9 +3732,7 @@ mod tests {
             .unwrap();
         insta::assert_snapshot!(
             snapshot(rrule.iter().take_while(|zdt| zdt <= until)),
-            @r"
-        1998-12-25T09:00:00-05:00[America/New_York]
-        ",
+            @"1998-12-25T09:00:00-05:00[America/New_York]",
         );
     }
 

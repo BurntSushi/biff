@@ -1,6 +1,6 @@
 ---
 source: src/ical.rs
-expression: snapshot(&rrule)
+expression: snapshot(rrule.iter().take_while(|zdt| zdt <= until))
 ---
 1997-09-02T09:00:00-04:00[America/New_York]
 1997-09-03T09:00:00-04:00[America/New_York]
