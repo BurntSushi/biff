@@ -22,7 +22,7 @@ keywords = ["date", "time", "jiff", "zone", "calendar"]
 categories = ["command-line-utilities", "date-and-time"]
 license = "Unlicense OR MIT"
 edition = "2024"
-rust-version = "1.85"
+rust-version = "1.93"
 autotests = false
 exclude = [
   "/.github/",
