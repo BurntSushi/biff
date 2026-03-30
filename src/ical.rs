@@ -794,7 +794,7 @@ impl<'a> Expander<'a> {
         &self,
         dt: DateTime,
     ) -> impl Iterator<Item = DateTime> {
-        // I tried writing this as one interator chain, but it was a complex
+        // I tried writing this as one iterator chain, but it was a complex
         // mess. Since I already defined `Either` for other uses, I felt it
         // was simpler to just use it here.
         let Ok(start) = first_of_week(self.rule().week_start, dt.date())
