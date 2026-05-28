@@ -215,7 +215,7 @@ jobs:
         mkdir -p "$ARCHIVE"/doc
         cp "$BIN" "$ARCHIVE"/
         cp {README.md,COPYING,UNLICENSE,LICENSE-MIT} "$ARCHIVE"/
-        cp CHANGELOG.md GUIDE.md COMPARISON.md "$ARCHIVE"/doc/
+        cp GUIDE.md COMPARISON.md "$ARCHIVE"/doc/
 
     - name: Build archive (Windows)
       shell: bash

@@ -252,7 +252,6 @@ $ git ls-files \
 2025-05-05 21:54:09 -0400       src/tz/tzif.rs
 2025-05-05 22:06:38 -0400       Cargo.toml
 2025-05-05 22:06:38 -0400       crates/jiff-static/Cargo.toml
-2025-05-07 18:55:23 -0400       CHANGELOG.md
 2025-05-07 18:55:23 -0400       scripts/test-various-feature-combos
 2025-05-07 18:55:23 -0400       src/error.rs
 2025-05-08 08:38:22 -0400       src/tz/system/mod.rs
