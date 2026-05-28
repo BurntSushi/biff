@@ -179,7 +179,7 @@ By default, only the first tag found is extracted. Subsequent tags on a line
 are ignored. This flag overrides that behavior and finds all tags on each line.
 
 The downside of this option is that multiple tags for each datum can lead to
-some confusing behavior in other commands. For example, `biff time cmp lt` will
+some confusing behavior in other commands. For example, `bttf time cmp lt` will
 allow tagged data through when *any* of its tags are less than the target
 datetime.
 "#,
@@ -214,7 +214,7 @@ For `datetime`, only definitive datetime strings are recognized. For example,
 RFC 9557, RFC 3339 or RFC 2822 timestamps.
 
 For `timezone`, each IANA time zone identifier available in the time zone
-database used by Biff are recognized.
+database used by bttf are recognized.
 
 When this is not provided *and* `-e/--regex` is not provided, then this
 defaults to `datetime`. Otherwise, if `-e/--regex` is provided, then this
@@ -256,8 +256,8 @@ Multiple patterns may be given.
 
 Note that matches are not validated. For example, if one uses a regex like
 `[0-9]{4}-[0-9]{2}-[0-9]{2}`, then this will match `2025-13-01`, which is
-not a valid Gregorian date. Biff will allow this tag to exist, but they can
-be validated by other commands. For example, `biff time parse` can be used
+not a valid Gregorian date. bttf will allow this tag to exist, but they can
+be validated by other commands. For example, `bttf time parse` can be used
 to validate tags as datetimes, and invalid datetimes can be dropped with the
 `-i/--ignore-invalid` flag.
 "#,

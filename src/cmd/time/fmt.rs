@@ -12,8 +12,8 @@ This accepts one or more datetimes as positional arguments. When no positional
 arguments are given, then line delimited datetimes are read from stdin.
 
 USAGE:
-    biff time fmt <datetime>...
-    biff time fmt < line delimited <datetime>
+    bttf time fmt <datetime>...
+    bttf time fmt < line delimited <datetime>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -21,23 +21,23 @@ TIP:
 EXAMPLES:
     Format the current time as a date with the month written out:
 
-        $ biff time fmt -f '%B %d, %Y' now
+        $ bttf time fmt -f '%B %d, %Y' now
 
     %snip-start%
 
     Format the current time as an RFC 2822 timestamp using the correct local
     offset for that instant in your time zone:
 
-        $ biff time fmt -f rfc2822 now
+        $ bttf time fmt -f rfc2822 now
 
     Do the same as above, but for one month ago:
 
-        $ biff time fmt -f rfc2822 -1mo
+        $ bttf time fmt -f rfc2822 -1mo
 
     Format the first instant of the given date, in your local time, as an
     RFC 9557 timestamp:
 
-        $ biff time fmt -f rfc9557 2025-03-15
+        $ bttf time fmt -f rfc9557 2025-03-15
 
     %snip-end%
 REQUIRED ARGUMENTS:

@@ -1,7 +1,7 @@
-use crate::{biff, command::assert_cmd_snapshot};
+use crate::{bttf, command::assert_cmd_snapshot};
 
 fn sort() -> crate::command::Command {
-    biff(["time", "sort"])
+    bttf(["time", "sort"])
 }
 
 #[test]
@@ -44,7 +44,7 @@ fn simple_tagged() {
 ";
 
     assert_cmd_snapshot!(
-        biff(["tag", "lines"]).stdin(stdin).pipe(sort()),
+        bttf(["tag", "lines"]).stdin(stdin).pipe(sort()),
         @r#"
     success: true
     exit_code: 0
@@ -58,7 +58,7 @@ fn simple_tagged() {
     );
 
     assert_cmd_snapshot!(
-        biff(["tag", "lines"]).stdin(stdin).pipe(sort().arg("-r")),
+        bttf(["tag", "lines"]).stdin(stdin).pipe(sort().arg("-r")),
         @r#"
     success: true
     exit_code: 0
@@ -80,7 +80,7 @@ fn multiple_tagged_simple() {
 ";
 
     assert_cmd_snapshot!(
-        biff(["tag", "lines", "--all"]).stdin(stdin).pipe(sort()),
+        bttf(["tag", "lines", "--all"]).stdin(stdin).pipe(sort()),
         @r#"
     success: true
     exit_code: 0
@@ -101,7 +101,7 @@ fn multiple_tagged_different_length() {
 ";
 
     assert_cmd_snapshot!(
-        biff(["tag", "lines", "--all"]).stdin(stdin).pipe(sort()),
+        bttf(["tag", "lines", "--all"]).stdin(stdin).pipe(sort()),
         @r#"
     success: true
     exit_code: 0
@@ -122,7 +122,7 @@ fn multiple_tagged_same_first_tag() {
 ";
 
     assert_cmd_snapshot!(
-        biff(["tag", "lines", "--all"]).stdin(stdin).pipe(sort()),
+        bttf(["tag", "lines", "--all"]).stdin(stdin).pipe(sort()),
         @r#"
     success: true
     exit_code: 0

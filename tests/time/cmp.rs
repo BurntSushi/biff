@@ -1,7 +1,7 @@
-use crate::{biff, command::assert_cmd_snapshot};
+use crate::{bttf, command::assert_cmd_snapshot};
 
 fn cmp() -> crate::command::Command {
-    biff(["time", "cmp"])
+    bttf(["time", "cmp"])
 }
 
 #[test]
@@ -105,7 +105,7 @@ fn single_tag() {
 2030-01-01T00Z
 ";
     assert_cmd_snapshot!(
-        biff(["tag", "lines"]).stdin(stdin).pipe(
+        bttf(["tag", "lines"]).stdin(stdin).pipe(
             cmp().args(["lt", "now"]),
         ),
         @r#"
@@ -129,7 +129,7 @@ fn multi_tag() {
 ";
 
     assert_cmd_snapshot!(
-        biff(["tag", "lines", "--all"]).stdin(stdin).pipe(
+        bttf(["tag", "lines", "--all"]).stdin(stdin).pipe(
             cmp().args(["lt", "now"]),
         ),
         @r#"
@@ -144,7 +144,7 @@ fn multi_tag() {
     );
 
     assert_cmd_snapshot!(
-        biff(["tag", "lines", "--all"]).stdin(stdin).pipe(
+        bttf(["tag", "lines", "--all"]).stdin(stdin).pipe(
             cmp().args(["eq", "now"]),
         ),
         @r#"

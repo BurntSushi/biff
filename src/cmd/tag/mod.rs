@@ -7,7 +7,7 @@ const USAGE: &'static str = "\
 Tag arbitrary data with datetimes.
 
 USAGE:
-    biff tag <command> ...
+    bttf tag <command> ...
 
 COMMANDS:
     exec     Tag files by running arbitrary commands

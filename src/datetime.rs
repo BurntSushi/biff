@@ -22,7 +22,7 @@ static TEMPORAL_PARSER: fmt::temporal::DateTimeParser =
 static RFC2822_PARSER: fmt::rfc2822::DateTimeParser =
     fmt::rfc2822::DateTimeParser::new();
 
-/// Represents a biff "datetime" parsed from user input.
+/// Represents a bttf "datetime" parsed from user input.
 ///
 /// Basically, everything comes down to a physical instant in time. We support
 /// a lot of different ways to get to one (including just clock time like
@@ -33,7 +33,7 @@ static RFC2822_PARSER: fmt::rfc2822::DateTimeParser =
 /// setting the `TZ` environment variable.
 ///
 /// This type exists primarily as a target for trait impls for tailoring
-/// behavior specific to `biff`.
+/// behavior specific to `bttf`.
 ///
 /// This is like `DateTimeFlexible`, but specifically does not support parsing
 /// datetimes implicitly relative to `NOW`. The idea is that doing this on data
@@ -65,7 +65,7 @@ Datetimes can either be passed as positional arguments or as line delimited
 data on stdin, but not both. That is, datetimes will only be read from stdin
 when there are no datetimes provided as positional arguments.
 
-Biff accepts a number of different formats for a datetime automatically.
+bttf accepts a number of different formats for a datetime automatically.
 Specifically, they can be in one of the following formats that each
 unambiguously refer to a particular instant in time:
 
@@ -95,8 +95,8 @@ example, `1 year 1 second` or `1y1s`.
 Some special strings are supported as well:
 
 `now` refers to the current datetime to the highest precision supported by
-your system. The current datetime is computed once when Biff starts, or if the
-`BIFF_NOW` environment variable is set, that time is used instead.
+your system. The current datetime is computed once when bttf starts, or if the
+`BTTF_NOW` environment variable is set, that time is used instead.
 
 `today` refers to the first instant of the current day.
 
@@ -118,7 +118,7 @@ the current day is a Saturday).
 `5pm tomorrow`, `5pm next Wed` or `5pm 1 week` refer to 5pm tomorrow, 5pm on
 
 If you need to parse one of the flexible datetime formats from stdin, then you
-can use either `biff time parse`.
+can use either `bttf time parse`.
 "#,
     );
 
@@ -128,7 +128,7 @@ can use either `biff time parse`.
         r#"
 A single datetime string.
 
-Biff accepts a number of different formats for a datetime automatically.
+bttf accepts a number of different formats for a datetime automatically.
 Specifically, they can be in one of the following formats that each
 unambiguously refer to a particular instant in time:
 
@@ -158,8 +158,8 @@ year 1 second` or `1y1s`.
 Some special strings are supported as well:
 
 `now` refers to the current datetime to the highest precision supported by
-your system. The current datetime is computed once when Biff starts, or if the
-`BIFF_NOW` environment variable is set, that time is used instead.
+your system. The current datetime is computed once when bttf starts, or if the
+`BTTF_NOW` environment variable is set, that time is used instead.
 
 `today` refers to the first instant of the current day.
 
@@ -188,7 +188,7 @@ the current day is a Saturday).
         r#"
 A single datetime string.
 
-Biff accepts a number of different formats for a datetime automatically.
+bttf accepts a number of different formats for a datetime automatically.
 Specifically, they can be in one of the following formats that each
 unambiguously refer to a particular instant in time:
 
@@ -218,8 +218,8 @@ year 1 second` or `1y1s`.
 Some special strings are supported as well:
 
 `now` refers to the current datetime to the highest precision supported by
-your system. The current datetime is computed once when Biff starts, or if the
-`BIFF_NOW` environment variable is set, that time is used instead.
+your system. The current datetime is computed once when bttf starts, or if the
+`BTTF_NOW` environment variable is set, that time is used instead.
 
 `today` refers to the first instant of the current day.
 
@@ -474,7 +474,7 @@ impl<'de> serde::Deserialize<'de> for DateTime {
     }
 }
 
-/// Represents a biff "datetime" parsed on the CLI.
+/// Represents a bttf "datetime" parsed on the CLI.
 ///
 /// This is only for parsing datetimes given to the CLI as positional
 /// arguments. In this context, we support specifying datetimes that are
@@ -504,7 +504,7 @@ impl DateTimeFlexible {
         // First try to parse something that is definitive. If it fails,
         // keep the error and we'll report it below if everything else fails.
         // We specifically try parsing a zoned datetime since my guess is
-        // that it's the common case in Biff shell pipelines.
+        // that it's the common case in bttf shell pipelines.
         let temporal_parse_err = match TEMPORAL_PARSER.parse_zoned(s) {
             Err(err) => err,
             Ok(zdt) => return Ok(DateTimeFlexible::from(zdt)),

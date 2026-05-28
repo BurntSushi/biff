@@ -1,7 +1,7 @@
 use crate::command::assert_cmd_snapshot;
 
 fn iso8601() -> crate::command::Command {
-    crate::biff(["span", "iso8601"])
+    crate::bttf(["span", "iso8601"])
 }
 
 #[test]

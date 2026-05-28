@@ -3,7 +3,7 @@ use crate::command::assert_cmd_snapshot;
 static NANOS: &str = "999999999999999999ns";
 
 fn balance() -> crate::command::Command {
-    crate::biff(["span", "balance"])
+    crate::bttf(["span", "balance"])
 }
 
 #[test]

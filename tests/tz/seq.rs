@@ -1,15 +1,15 @@
-use crate::{biff, command::assert_cmd_snapshot};
+use crate::{bttf, command::assert_cmd_snapshot};
 
 fn seq() -> crate::command::Command {
-    biff(["tz", "seq"])
+    bttf(["tz", "seq"])
 }
 
 fn next() -> crate::command::Command {
-    biff(["tz", "next"])
+    bttf(["tz", "next"])
 }
 
 fn prev() -> crate::command::Command {
-    biff(["tz", "prev"])
+    bttf(["tz", "prev"])
 }
 
 #[test]
@@ -114,7 +114,7 @@ quux 2025-07-01T00:00:00-04 baz
 ";
 
     assert_cmd_snapshot!(
-        biff(["tag", "lines"]).stdin(stdin).pipe(
+        bttf(["tag", "lines"]).stdin(stdin).pipe(
             next().args(["America/New_York"]),
         ),
         @r#"
@@ -129,7 +129,7 @@ quux 2025-07-01T00:00:00-04 baz
     );
 
     assert_cmd_snapshot!(
-        biff(["tag", "lines"]).stdin(stdin).pipe(
+        bttf(["tag", "lines"]).stdin(stdin).pipe(
             next().args(["America/New_York", "-c2"]),
         ),
         @r#"
@@ -215,7 +215,7 @@ quux 2025-07-01T00:00:00-04 baz
 ";
 
     assert_cmd_snapshot!(
-        biff(["tag", "lines"]).stdin(stdin).pipe(
+        bttf(["tag", "lines"]).stdin(stdin).pipe(
             next().args(["Asia/Kolkata"]),
         ),
         @r#"
@@ -238,7 +238,7 @@ foo 2025-01-01T00:00:00-05 bar 9999-11-31T00Z
 ";
 
     assert_cmd_snapshot!(
-        biff(["tag", "lines", "--all"]).stdin(stdin).pipe(
+        bttf(["tag", "lines", "--all"]).stdin(stdin).pipe(
             next().args(["America/New_York"]),
         ),
         @r#"
@@ -317,7 +317,7 @@ foo 2025-01-01T00:00:00-05 bar
 ";
 
     assert_cmd_snapshot!(
-        biff(["tag", "lines"]).stdin(stdin).pipe(
+        bttf(["tag", "lines"]).stdin(stdin).pipe(
             prev().args(["America/New_York"]),
         ),
         @r#"
@@ -332,7 +332,7 @@ foo 2025-01-01T00:00:00-05 bar
     );
 
     assert_cmd_snapshot!(
-        biff(["tag", "lines"]).stdin(stdin).pipe(
+        bttf(["tag", "lines"]).stdin(stdin).pipe(
             prev().args(["America/New_York", "-c2"]),
         ),
         @r#"
@@ -419,7 +419,7 @@ foo 2025-01-01T00:00:00-05 bar
 ";
 
     assert_cmd_snapshot!(
-        biff(["tag", "lines"]).stdin(stdin).pipe(
+        bttf(["tag", "lines"]).stdin(stdin).pipe(
             prev().args(["Asia/Kolkata"]),
         ),
         @r#"
@@ -442,7 +442,7 @@ foo 2025-01-01T00:00:00-05 bar 1800-01-01T00Z
 ";
 
     assert_cmd_snapshot!(
-        biff(["tag", "lines", "--all"]).stdin(stdin).pipe(
+        bttf(["tag", "lines", "--all"]).stdin(stdin).pipe(
             prev().args(["America/New_York"]),
         ),
         @r#"

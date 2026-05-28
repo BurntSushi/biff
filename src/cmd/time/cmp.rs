@@ -16,8 +16,8 @@ This is useful for filtering datetimes according to whether they are older or
 newer than a reference time.
 
 USAGE:
-    biff time cmp <op> <datetime> <datetime>...
-    biff time cmp <op> <datetime> < line delimited <datetime>
+    bttf time cmp <op> <datetime> <datetime>...
+    bttf time cmp <op> <datetime> < line delimited <datetime>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -25,7 +25,7 @@ TIP:
 EXAMPLES:
     Print only the datetimes that are more recent than 2025-03-01:
 
-        $ biff time cmp gt 2025-03-01 2025-02-28 2025-03-02
+        $ bttf time cmp gt 2025-03-01 2025-02-28 2025-03-02
         2025-03-02T00:00:00-05:00[America/New_York]
 
     %snip-start%
@@ -33,9 +33,9 @@ EXAMPLES:
     This can also be applied to tagged data. For example, to only print
     lines in a log with a datetime older than 2025-03-10 11:01 (local time):
 
-        $ biff tag lines access.log \
-            | biff time cmp lt 2025-03-10T11:01 \
-            | biff untag -s
+        $ bttf tag lines access.log \
+            | bttf time cmp lt 2025-03-10T11:01 \
+            | bttf untag -s
 
     %snip-end%
 REQUIRED ARGUMENTS:

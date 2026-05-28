@@ -14,8 +14,8 @@ reading from stdin, tagged data is also accepted. In the case of tagged data
 with multiple datetime tags, sorting is done lexicographically.
 
 USAGE:
-    biff time sort <datetime>...
-    biff time sort < line delimited <datetime>
+    bttf time sort <datetime>...
+    bttf time sort < line delimited <datetime>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -25,9 +25,9 @@ EXAMPLES:
     display such that the datetime is included with the file path:
 
         git ls-files \
-            | biff tag exec git log -n1 --format='%cI' \
-            | biff time sort \
-            | biff untag -f '{tag} {data}'
+            | bttf tag exec git log -n1 --format='%cI' \
+            | bttf time sort \
+            | bttf untag -f '{tag} {data}'
 
 REQUIRED ARGUMENTS:
 %args%

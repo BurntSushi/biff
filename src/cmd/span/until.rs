@@ -16,13 +16,13 @@ makes the operation reversible. (See below for examples.)
 This accepts one or more datetimes as positional arguments. When no positional
 arguments are given, then line delimited datetimes are read from stdin.
 
-This is like `biff span since`, except the order of the arguments are flipped.
+This is like `bttf span since`, except the order of the arguments are flipped.
 Or stated differently, the span returned is the negation of what would be
-returned by `biff span since`.
+returned by `bttf span since`.
 
 USAGE:
-    biff span until <datetime>...
-    biff span until < line delimited <datatime>
+    bttf span until <datetime>...
+    bttf span until < line delimited <datatime>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -31,37 +31,37 @@ EXAMPLES:
     Return the amount of time until a signed 32-bit integer can no longer
     represent the current time using the Unix epoch:
 
-        $ biff time parse -f '%s' 2147483648 | biff span until
+        $ bttf time parse -f '%s' 2147483648 | bttf span until
         112184h 4m 5s 885ms 385µs 852ns
 
     Or rounded to something more meaningful to a human:
 
-        $ biff time parse -f '%s' 2147483648 \
-            | biff span until \
-            | biff span round -lyear -sday
+        $ bttf time parse -f '%s' 2147483648 \
+            | bttf span until \
+            | bttf span round -lyear -sday
         12y 9mo 16d
 
     %snip-start%
 
     Find the time, rounded to the nearest number of days, until June 30:
 
-        $ biff span until 2025-06-30 | biff span round -s days
+        $ bttf span until 2025-06-30 | bttf span round -s days
         88d
 
     Units up to hours are returned by default so that operations are
     reversible:
 
-        $ biff span until -r 2024-04-30 2024-05-31
+        $ bttf span until -r 2024-04-30 2024-05-31
         744h
-        $ biff time add 744h 2024-04-30
+        $ bttf time add 744h 2024-04-30
         2024-05-31T00:00:00-04:00[America/New_York]
 
     In contrast, when using calendar units, reversibility is no longer
     guaranteed:
 
-        $ biff span until -l month -r 2024-05-31 2024-04-30
+        $ bttf span until -l month -r 2024-05-31 2024-04-30
         1mo ago
-        $ biff time add 1mo 2024-04-30
+        $ bttf time add 1mo 2024-04-30
         2024-05-30T00:00:00-04:00[America/New_York]
 
     %snip-end%

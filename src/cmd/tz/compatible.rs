@@ -25,7 +25,7 @@ the special `Etc/Unknown` identifier is returned.
 The list is printed in lexicographic order.
 
 USAGE:
-    biff tz compatible <datetime>
+    bttf tz compatible <datetime>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -34,7 +34,7 @@ EXAMPLES:
     This command makes it easy to print the time zones compatible with a
     particular instant:
 
-        $ biff tz compatible '2025-03-09T17:00+10:30'
+        $ bttf tz compatible '2025-03-09T17:00+10:30'
         Australia/Adelaide
         Australia/Broken_Hill
         Australia/South

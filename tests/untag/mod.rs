@@ -1,6 +1,6 @@
 use crate::command::assert_cmd_snapshot;
 
-use crate::{TempDir, biff};
+use crate::{TempDir, bttf};
 
 #[test]
 fn basic() {
@@ -9,7 +9,7 @@ fn basic() {
 2024-07-19T00Z 2024-07-22T00Z
 ";
     assert_cmd_snapshot!(
-        biff(["tag", "lines"]).stdin(stdin).pipe(biff(["untag"])),
+        bttf(["tag", "lines"]).stdin(stdin).pipe(bttf(["untag"])),
         @r"
     success: true
     exit_code: 0
@@ -29,9 +29,9 @@ fn substitute() {
 2024-07-19T00Z 2024-07-22T00Z
 ";
     assert_cmd_snapshot!(
-        biff(["tag", "lines", "--all"]).stdin(stdin)
-            .pipe(biff(["time", "parse", "--format=rfc3339"]))
-            .pipe(biff(["untag", "--substitute"])),
+        bttf(["tag", "lines", "--all"]).stdin(stdin)
+            .pipe(bttf(["time", "parse", "--format=rfc3339"]))
+            .pipe(bttf(["untag", "--substitute"])),
         @r"
     success: true
     exit_code: 0
@@ -52,8 +52,8 @@ fn format_single_tag() {
     tmp.create("quux", "2025-03-15T00Z Helm");
 
     assert_cmd_snapshot!(
-        tmp.biff(["tag", "files", "foo", "bar", "quux"])
-            .pipe(biff(["untag", "-f", "{tag}:{data}"])),
+        tmp.bttf(["tag", "files", "foo", "bar", "quux"])
+            .pipe(bttf(["untag", "-f", "{tag}:{data}"])),
         @r"
     success: true
     exit_code: 0
@@ -75,9 +75,9 @@ fn format_substitute_single_tag() {
     tmp.create("quux", "2025-03-15T00Z Helm");
 
     assert_cmd_snapshot!(
-        tmp.biff(["tag", "files", "foo", "bar", "quux"])
-            .pipe(biff(["time", "fmt", "-f", "%Y-%m-%d %H:%M:%S %:z"]))
-            .pipe(biff(["untag", "-f", "{tag}:{data}"])),
+        tmp.bttf(["tag", "files", "foo", "bar", "quux"])
+            .pipe(bttf(["time", "fmt", "-f", "%Y-%m-%d %H:%M:%S %:z"]))
+            .pipe(bttf(["untag", "-f", "{tag}:{data}"])),
         @r"
     success: true
     exit_code: 0
@@ -99,8 +99,8 @@ fn format_multi_tag() {
     tmp.create("quux", "2025-03-15T00Z Helm 2024-10-01T00Z");
 
     assert_cmd_snapshot!(
-        tmp.biff(["tag", "files", "--all", "foo", "bar", "quux"])
-            .pipe(biff(["untag", "-f", "{tag}:{data}"])),
+        tmp.bttf(["tag", "files", "--all", "foo", "bar", "quux"])
+            .pipe(bttf(["untag", "-f", "{tag}:{data}"])),
         @r"
     success: true
     exit_code: 0
@@ -125,9 +125,9 @@ fn format_substitute_multi_tag() {
     tmp.create("quux", "2025-03-15T00Z Helm 2024-10-01T00Z");
 
     assert_cmd_snapshot!(
-        tmp.biff(["tag", "files", "--all", "foo", "bar", "quux"])
-            .pipe(biff(["time", "fmt", "-f", "%Y-%m-%d %H:%M:%S %:z"]))
-            .pipe(biff(["untag", "-f", "{tag}:{data}"])),
+        tmp.bttf(["tag", "files", "--all", "foo", "bar", "quux"])
+            .pipe(bttf(["time", "fmt", "-f", "%Y-%m-%d %H:%M:%S %:z"]))
+            .pipe(bttf(["untag", "-f", "{tag}:{data}"])),
         @r"
     success: true
     exit_code: 0
@@ -152,8 +152,8 @@ fn format_escaping() {
     tmp.create("quux", "2025-03-15T00Z Helm");
 
     assert_cmd_snapshot!(
-        tmp.biff(["tag", "files", "foo", "bar", "quux"])
-            .pipe(biff(["untag", "-f", r"\{tag\}:\{data\}"])),
+        tmp.bttf(["tag", "files", "foo", "bar", "quux"])
+            .pipe(bttf(["untag", "-f", r"\{tag\}:\{data\}"])),
         @r"
     success: true
     exit_code: 0
@@ -175,8 +175,8 @@ fn format_invalid_directive() {
     tmp.create("quux", "2025-03-15T00Z Helm");
 
     assert_cmd_snapshot!(
-        tmp.biff(["tag", "files", "foo", "bar", "quux"])
-            .pipe(biff(["untag", "-f", "{tagg}:{data}"])),
+        tmp.bttf(["tag", "files", "foo", "bar", "quux"])
+            .pipe(bttf(["untag", "-f", "{tagg}:{data}"])),
         @r"
     success: false
     exit_code: 1
@@ -188,8 +188,8 @@ fn format_invalid_directive() {
     );
 
     assert_cmd_snapshot!(
-        tmp.biff(["tag", "files", "foo", "bar", "quux"])
-            .pipe(biff(["untag", "-f", "{tag:{data}"])),
+        tmp.bttf(["tag", "files", "foo", "bar", "quux"])
+            .pipe(bttf(["untag", "-f", "{tag:{data}"])),
         @r"
     success: false
     exit_code: 1
@@ -201,8 +201,8 @@ fn format_invalid_directive() {
     );
 
     assert_cmd_snapshot!(
-        tmp.biff(["tag", "files", "foo", "bar", "quux"])
-            .pipe(biff(["untag", "-f", "{tag"])),
+        tmp.bttf(["tag", "files", "foo", "bar", "quux"])
+            .pipe(bttf(["untag", "-f", "{tag"])),
         @r"
     success: false
     exit_code: 1
@@ -214,8 +214,8 @@ fn format_invalid_directive() {
     );
 
     assert_cmd_snapshot!(
-        tmp.biff(["tag", "files", "foo", "bar", "quux"])
-            .pipe(biff(["untag", "-f", r"abc\"])),
+        tmp.bttf(["tag", "files", "foo", "bar", "quux"])
+            .pipe(bttf(["untag", "-f", r"abc\"])),
         @r"
     success: false
     exit_code: 1
@@ -227,8 +227,8 @@ fn format_invalid_directive() {
     );
 
     assert_cmd_snapshot!(
-        tmp.biff(["tag", "files", "foo", "bar", "quux"])
-            .pipe(biff(["untag", "-f", r"{abc\"])),
+        tmp.bttf(["tag", "files", "foo", "bar", "quux"])
+            .pipe(bttf(["untag", "-f", r"{abc\"])),
         @r"
     success: false
     exit_code: 1

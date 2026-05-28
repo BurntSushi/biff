@@ -9,7 +9,7 @@ const USAGE: &'static str = r#"
 Commands for working with calendar and time durations.
 
 USAGE:
-    biff span <command> ...
+    bttf span <command> ...
 
 COMMANDS:
     balance  Change the largest non-zero unit in a span

@@ -4,7 +4,7 @@ Defines a simple command snapshotting mechanism.
 This took some inspiration from `insta-cmd`, but re-works a few things. In
 particular, this provides a rudimentary "pipelining" abstraction that enables
 one to pipe the stdout of one command into the stdin of another. This is
-especially useful for Biff, since it heavily relies on composition.
+especially useful for bttf, since it heavily relies on composition.
 
 This also defines a wrapper around `std::process::Command` that all of the
 tests use instead. It's essentially the same builder with some helper methods

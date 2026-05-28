@@ -19,8 +19,8 @@ This accepts one or more datetimes as positional arguments. When no positional
 arguments are given, then line delimited datetimes are read from stdin.
 
 USAGE:
-    biff time start-of <datetime>...
-    biff time start-of < line delimited <datetime>
+    bttf time start-of <datetime>...
+    bttf time start-of < line delimited <datetime>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -28,7 +28,7 @@ TIP:
 EXAMPLES:
     Print the first instant of the current day:
 
-        $ biff time start-of day now
+        $ bttf time start-of day now
         2025-04-02T00:00:00-04:00[America/New_York]
 
     %snip-start%
@@ -36,21 +36,21 @@ EXAMPLES:
     Print the first instant of the current week, for weeks starting with
     Sunday:
 
-        $ biff time start-of week-sunday now
+        $ bttf time start-of week-sunday now
         2025-03-30T00:00:00-04:00[America/New_York]
 
     Or, the same, but for weeks starting with Monday:
 
-        $ biff time start-of week-monday now
+        $ bttf time start-of week-monday now
         2025-03-31T00:00:00-04:00[America/New_York]
 
     This command is aware of time zone transitions. For example, on
     2015-10-18, Sao Paulo entered DST. Unlike most places, they set their
     clocks forward at midnight, which means the midnight hour never actually
-    occurs on their clocks. So if you ask Biff for the start of 2015-10-18 in
+    occurs on their clocks. So if you ask bttf for the start of 2015-10-18 in
     Sao Paulo's time zone, it will correctly report 1am:
 
-        $ biff time start-of day '2015-10-18[America/Sao_Paulo]'
+        $ bttf time start-of day '2015-10-18[America/Sao_Paulo]'
         2015-10-18T01:00:00-02:00[America/Sao_Paulo]
 
     %snip-end%
@@ -71,8 +71,8 @@ This accepts one or more datetimes as positional arguments. When no positional
 arguments are given, then line delimited datetimes are read from stdin.
 
 USAGE:
-    biff time end-of <datetime>...
-    biff time end-of < line delimited <datetime>
+    bttf time end-of <datetime>...
+    bttf time end-of < line delimited <datetime>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -80,7 +80,7 @@ TIP:
 EXAMPLES:
     Print the last instant of the current day:
 
-        $ biff time end-of day now
+        $ bttf time end-of day now
         2025-04-02T23:59:59.999999999-04:00[America/New_York]
 
     %snip-start%
@@ -88,12 +88,12 @@ EXAMPLES:
     Print the last instant of the current week, for weeks starting with
     Sunday:
 
-        $ biff time end-of week-sunday now
+        $ bttf time end-of week-sunday now
         2025-04-05T23:59:59.999999999-04:00[America/New_York]
 
     Or, the same, but for weeks starting with Monday:
 
-        $ biff time end-of week-monday now
+        $ bttf time end-of week-monday now
         2025-04-06T23:59:59.999999999-04:00[America/New_York]
 
     %snip-end%

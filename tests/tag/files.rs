@@ -8,7 +8,7 @@ fn positional() {
     tmp.create("foo", "2025-03-15T00-04");
 
     assert_cmd_snapshot!(
-        tmp.biff(["tag", "files", "foo"]),
+        tmp.bttf(["tag", "files", "foo"]),
         @r#"
     success: true
     exit_code: 0
@@ -28,7 +28,7 @@ fn stdin() {
     // Notice that the line terminator is missing in the input and, therefore,
     // also the output!
     assert_cmd_snapshot!(
-        tmp.biff(["tag", "files"]).stdin("foo"),
+        tmp.bttf(["tag", "files"]).stdin("foo"),
         @r#"
     success: true
     exit_code: 0
@@ -40,7 +40,7 @@ fn stdin() {
     );
 
     assert_cmd_snapshot!(
-        tmp.biff(["tag", "files"]).stdin("foo\n"),
+        tmp.bttf(["tag", "files"]).stdin("foo\n"),
         @r#"
     success: true
     exit_code: 0
@@ -58,7 +58,7 @@ fn not_utf8() {
     tmp.create("foo", b"\xFF2025-03-15T00-04\xFF");
 
     assert_cmd_snapshot!(
-        tmp.biff(["tag", "files", "foo"]),
+        tmp.bttf(["tag", "files", "foo"]),
         @r#"
     success: true
     exit_code: 0
@@ -76,7 +76,7 @@ fn nothing() {
     tmp.create("foo", "2025-03-15T00-04");
 
     assert_cmd_snapshot!(
-        tmp.biff(["tag", "files", "--auto=none", "foo"]),
+        tmp.bttf(["tag", "files", "--auto=none", "foo"]),
         @r#"
     success: true
     exit_code: 0
@@ -94,7 +94,7 @@ fn explicit_regex_disables_auto() {
     tmp.create("foo", "2025-03-15T00-04 03/15/2025");
 
     assert_cmd_snapshot!(
-        tmp.biff(["tag", "files", "-e", r"[0-9]{2}/[0-9]{2}/[0-9]{4}", "foo"]),
+        tmp.bttf(["tag", "files", "-e", r"[0-9]{2}/[0-9]{2}/[0-9]{4}", "foo"]),
         @r#"
     success: true
     exit_code: 0
@@ -112,7 +112,7 @@ fn explicit_regex_with_tag() {
     tmp.create("foo", "date: 03/15/2025\nSome text about 12/01/2024.\n");
 
     assert_cmd_snapshot!(
-        tmp.biff([
+        tmp.bttf([
             "tag",
             "files",
             "-e", r"date: (?<tag>[0-9]{2}/[0-9]{2}/[0-9]{4})",
@@ -136,7 +136,7 @@ fn explicit_regex_with_auto() {
     tmp.create("bar", "03/15/2025");
 
     assert_cmd_snapshot!(
-        tmp.biff([
+        tmp.bttf([
             "tag",
             "files",
             "--auto", "datetime",
@@ -165,7 +165,7 @@ fn auto_time_zone() {
     );
 
     assert_cmd_snapshot!(
-        tmp.biff(["tag", "files", "--all", "--auto", "timezone", "foo"]),
+        tmp.bttf(["tag", "files", "--all", "--auto", "timezone", "foo"]),
         @r#"
     success: true
     exit_code: 0

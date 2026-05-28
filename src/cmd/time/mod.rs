@@ -13,7 +13,7 @@ const USAGE: &'static str = "\
 Commands for working with datetimes.
 
 USAGE:
-    biff time <command> ...
+    bttf time <command> ...
 
 COMMANDS:
     add       Add a span to a datetime

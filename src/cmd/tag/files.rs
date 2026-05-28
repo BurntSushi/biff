@@ -16,16 +16,16 @@ By default, this will extract tags in well specified datetime formats.
 Currently, this includes RFC 9557, RFC 3339, RFC 2822 and RFC 9110 timestamps.
 
 To extract arbitrary tags, use the `-e/--regex` flag to write your own regex.
-Then you can use `biff time parse` to parse it into an actual point in time
+Then you can use `bttf time parse` to parse it into an actual point in time
 via strftime-like syntax.
 
 This command is useful when you want to associate one or more tags with an
 entire file, rather than with a specific part of a file (as one might do with
-`biff tag lines`).
+`bttf tag lines`).
 
 USAGE:
-    biff tag files <path> ...
-    biff tag files < line delimited <path>
+    bttf tag files <path> ...
+    bttf tag files < line delimited <path>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -33,7 +33,7 @@ TIP:
 EXAMPLES:
     Extract datetimes from PDF files in standard formats:
 
-        biff tag files *.pdf
+        bttf tag files *.pdf
 
     %snip-start%
 
@@ -42,7 +42,7 @@ EXAMPLES:
     of the full regex match:
 
         find ./public/ -type f \
-            | biff tag files \
+            | bttf tag files \
                 -e '<span class="post-meta">(?<tag>\S+ [0-9]{1,2}, [0-9]{4})'
 
     %snip-end%

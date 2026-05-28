@@ -173,7 +173,7 @@ impl Custom for StrtimeLocaleFormatter {
 
 // This was the original more generic version that I came up with. Writing
 // down the trait bounds was QUITE the effort, so I am keeping this around
-// for now. But the above is a more concrete version that works for Biff's
+// for now. But the above is a more concrete version that works for bttf's
 // specific use case. In particular, when I wrote the below, I didn't know
 // about the enums that provide a more dynamic API that is way more ergonomic.
 /*

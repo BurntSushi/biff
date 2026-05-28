@@ -27,18 +27,18 @@ impl TempDir {
         TempDir(tempfile::tempdir().unwrap())
     }
 
-    /// Create a new `biff` command whose CWD is this directory.
-    fn biff_bare(&self) -> crate::command::Command {
-        biff_bare().current_dir(self.0.path())
+    /// Create a new `bttf` command whose CWD is this directory.
+    fn bttf_bare(&self) -> crate::command::Command {
+        bttf_bare().current_dir(self.0.path())
     }
 
-    /// Create a new `biff` command whose CWD is this directory and the
+    /// Create a new `bttf` command whose CWD is this directory and the
     /// given arguments appended to it.
-    fn biff<T: AsRef<OsStr>>(
+    fn bttf<T: AsRef<OsStr>>(
         &self,
         args: impl IntoIterator<Item = T>,
     ) -> crate::command::Command {
-        self.biff_bare().args(args)
+        self.bttf_bare().args(args)
     }
 
     /// Create a new file in this temporary directory with the given relative
@@ -53,30 +53,30 @@ impl TempDir {
     }
 }
 
-/// Return a command for the `biff` binary and no argument.
-fn biff_bare() -> crate::command::Command {
-    crate::command::bin("biff")
+/// Return a command for the `bttf` binary and no argument.
+fn bttf_bare() -> crate::command::Command {
+    crate::command::bin("bttf")
         .env("TZ", "America/New_York")
-        .env("BIFF_NOW", NOW.to_string())
+        .env("BTTF_NOW", NOW.to_string())
         // So that when tests are run with `--features locale`,
-        // we still get consistent behavior as if Biff were
+        // we still get consistent behavior as if bttf were
         // compiled without locale support.
-        .env("BIFF_LOCALE", "und")
+        .env("BTTF_LOCALE", "und")
 }
 
-/// Return a command for the `biff` binary with the given arguments appended
+/// Return a command for the `bttf` binary with the given arguments appended
 /// to it.
-fn biff<T: AsRef<OsStr>>(
+fn bttf<T: AsRef<OsStr>>(
     args: impl IntoIterator<Item = T>,
 ) -> crate::command::Command {
-    biff_bare().args(args)
+    bttf_bare().args(args)
 }
 
-/// Test that calling `biff` with no arguments prints the current time.
+/// Test that calling `bttf` with no arguments prints the current time.
 #[test]
 fn no_args() {
     crate::command::assert_cmd_snapshot!(
-        biff_bare(),
+        bttf_bare(),
         @r"
     success: true
     exit_code: 0
@@ -88,13 +88,13 @@ fn no_args() {
     );
 }
 
-/// Test that calling `biff` when compiled with `locale` and when `BIFF_LOCALE`
+/// Test that calling `bttf` when compiled with `locale` and when `BTTF_LOCALE`
 /// is set does something sensible.
 #[cfg(feature = "locale")]
 #[test]
 fn no_args_locale() {
     crate::command::assert_cmd_snapshot!(
-        biff_bare().env("BIFF_LOCALE", "en-US"),
+        bttf_bare().env("BTTF_LOCALE", "en-US"),
         @r"
     success: true
     exit_code: 0
@@ -106,7 +106,7 @@ fn no_args_locale() {
     );
 
     crate::command::assert_cmd_snapshot!(
-        biff_bare().env("BIFF_LOCALE", "en-GB"),
+        bttf_bare().env("BTTF_LOCALE", "en-GB"),
         @r"
     success: true
     exit_code: 0
@@ -118,7 +118,7 @@ fn no_args_locale() {
     );
 
     crate::command::assert_cmd_snapshot!(
-        biff_bare().env("TZ", "Europe/London").env("BIFF_LOCALE", "en-GB"),
+        bttf_bare().env("TZ", "Europe/London").env("BTTF_LOCALE", "en-GB"),
         @r"
     success: true
     exit_code: 0
@@ -130,7 +130,7 @@ fn no_args_locale() {
     );
 
     crate::command::assert_cmd_snapshot!(
-        biff_bare().env("TZ", "Europe/Paris").env("BIFF_LOCALE", "fr-LA"),
+        bttf_bare().env("TZ", "Europe/Paris").env("BTTF_LOCALE", "fr-LA"),
         @r"
     success: true
     exit_code: 0
@@ -142,9 +142,9 @@ fn no_args_locale() {
     );
 
     crate::command::assert_cmd_snapshot!(
-        biff_bare()
+        bttf_bare()
             .env("TZ", "US/Eastern")
-            .env("BIFF_LOCALE", "en-US-u-ca-buddhist"),
+            .env("BTTF_LOCALE", "en-US-u-ca-buddhist"),
         @r"
     success: true
     exit_code: 0

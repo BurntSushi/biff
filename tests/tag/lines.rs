@@ -1,7 +1,7 @@
 use crate::command::assert_cmd_snapshot;
 
 fn lines() -> crate::command::Command {
-    crate::biff(["tag", "lines"])
+    crate::bttf(["tag", "lines"])
 }
 
 #[test]

@@ -16,7 +16,7 @@ impl std::str::FromStr for Locale {
 
     fn from_str(_: &str) -> anyhow::Result<Locale> {
         anyhow::bail!(
-            "Biff must be compiled with the `locale` feature to \
+            "bttf must be compiled with the `locale` feature to \
              format datetimes in a particular locale",
         )
     }

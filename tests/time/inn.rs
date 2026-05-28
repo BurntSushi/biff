@@ -1,7 +1,7 @@
 use crate::command::assert_cmd_snapshot;
 
 fn inn() -> crate::command::Command {
-    crate::biff(["time", "in"])
+    crate::bttf(["time", "in"])
 }
 
 #[test]

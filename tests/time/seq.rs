@@ -1,11 +1,11 @@
 use crate::command::assert_cmd_snapshot;
 
 fn seq() -> crate::command::Command {
-    crate::biff(["time", "seq"])
+    crate::bttf(["time", "seq"])
 }
 
 // N.B. We don't really try to test the RFC 5545 functionality here too much,
-// since that is extensively tested via unit tests within Biff. Instead, we
+// since that is extensively tested via unit tests within bttf. Instead, we
 // try to focus a bit more on the CLI interaction points.
 
 #[test]

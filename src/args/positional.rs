@@ -189,7 +189,7 @@ impl Configurable for Arguments {
                 let v = std::mem::take(v);
                 let bytes = Vec::from_os_string(v).map_err(|arg| {
                     anyhow::anyhow!(
-                        "biff requires that positional arguments \
+                        "bttf requires that positional arguments \
                          be valid UTF-8 in non-Unix environments, \
                          but `{arg:?}` is not valid UTF-8",
                     )

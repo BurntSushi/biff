@@ -1,10 +1,10 @@
 use bstr::ByteSlice;
 
-use crate::biff;
+use crate::bttf;
 
 #[test]
 fn basic() {
-    let snap = biff(["tz", "list"]).snapshot();
+    let snap = bttf(["tz", "list"]).snapshot();
     let stdout = snap.stdout();
     // We don't want to be too pedantic about what we get here. But we
     // can assert some basic stuff that should generally always be true,

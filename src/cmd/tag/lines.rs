@@ -22,12 +22,12 @@ formats will be automatically extracted. Currently, this includes RFC 9557,
 RFC 3339, RFC 2822 and RFC 9110 timestamps.
 
 To extract arbitrary tags, use the `-e/--regex` flag to write your own regex.
-Then you can use `biff time parse` to parse it into an actual point in time
+Then you can use `bttf time parse` to parse it into an actual point in time
 via strftime-like syntax.
 
 USAGE:
-    biff tag lines <path>
-    biff tag lines < line delimited data
+    bttf tag lines <path>
+    bttf tag lines < line delimited data
 
 TIP:
     use -h for short docs and --help for long docs
@@ -36,9 +36,9 @@ EXAMPLES:
     Extract datetimes from each line in a Caddy log file and reformat them
     into local time in a format of your choosing:
 
-        biff tag lines < access.log \
-            | biff time fmt -f '%B %-d, %Y at %H:%M:%S' \
-            | biff untag --substitute
+        bttf tag lines < access.log \
+            | bttf time fmt -f '%B %-d, %Y at %H:%M:%S' \
+            | bttf untag --substitute
 
 POSITIONAL ARGUMENTS:
 %args%

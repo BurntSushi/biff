@@ -13,8 +13,8 @@ Interpret a relative description of a datetime with one or more datetimes given
 as reference points.
 
 USAGE:
-    biff time relative <relative-description> <datetime>...
-    biff time relative <relative-description> < line delimited <datetime>
+    bttf time relative <relative-description> <datetime>...
+    bttf time relative <relative-description> < line delimited <datetime>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -22,7 +22,7 @@ TIP:
 EXAMPLES:
     Get the first Monday on or after a particular date:
 
-        $ biff time relative 'this monday' 2025-04-22
+        $ bttf time relative 'this monday' 2025-04-22
         2025-04-28T00:00:00-04:00[America/New_York]
 
 REQUIRED ARGUMENTS:
@@ -93,8 +93,8 @@ allowed, for example, `1 year 1 second` or `1y1s`.
 Some special strings are supported as well:
 
 `now` refers to the current datetime to the highest precision supported by
-your system. The current datetime is computed once when Biff starts, or if the
-`BIFF_NOW` environment variable is set, that time is used instead.
+your system. The current datetime is computed once when bttf starts, or if the
+`BTTF_NOW` environment variable is set, that time is used instead.
 
 `today` refers to the first instant of the current day.
 
