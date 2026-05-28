@@ -148,7 +148,7 @@ fn collect_usage_for_flags<'a>(
 /// argument.
 ///
 /// We make `-[0-9]` always be interpreted as a positional argument, because,
-/// for `biff`, things like `-1h` are very common. And forcing users to prefix
+/// for `bttf`, things like `-1h` are very common. And forcing users to prefix
 /// that with `--` to indicate the start of unambiguously positional arguments
 /// is super annoying. In exchange, we can't have a short flag corresponding to
 /// an ASCII digit.
@@ -343,9 +343,9 @@ pub struct Help(String);
 impl Help {
     const USAGE: Usage = Usage::flag(
         "-h/--help",
-        "This flag prints the help output for Biff.",
+        "This flag prints the help output for bttf.",
         r#"
-This flag prints the help output for Biff.
+This flag prints the help output for bttf.
 
 Unlike most other flags, the behavior of the short flag, -h, and the long flag,
 --help, is different. The short flag will show a condensed help output while
@@ -375,9 +375,9 @@ pub struct Version;
 impl Version {
     const USAGE: Usage = Usage::flag(
         "--version",
-        "This flag prints the version of Biff.",
+        "This flag prints the version of bttf.",
         r#"
-This flag prints the version of Biff.
+This flag prints the version of bttf.
 "#,
     );
 }
@@ -385,7 +385,7 @@ This flag prints the version of Biff.
 impl std::fmt::Display for Version {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         let semver = option_env!("CARGO_PKG_VERSION").unwrap_or("N/A");
-        let version = match option_env!("BIFF_BUILD_GIT_HASH") {
+        let version = match option_env!("BTTF_BUILD_GIT_HASH") {
             None => semver.to_string(),
             Some(hash) => format!("{semver} (rev {hash})"),
         };
@@ -394,7 +394,7 @@ impl std::fmt::Display for Version {
         } else {
             ""
         };
-        write!(f, "Biff {version}{locale}")
+        write!(f, "bttf {version}{locale}")
     }
 }
 

@@ -1,7 +1,7 @@
-use crate::{biff, command::assert_cmd_snapshot};
+use crate::{bttf, command::assert_cmd_snapshot};
 
 fn fmt() -> crate::command::Command {
-    biff(["span", "fmt"])
+    bttf(["span", "fmt"])
 }
 
 #[test]
@@ -253,7 +253,7 @@ fn fractional() {
     // our duration isn't quite the same due
     // to precision loss.
     assert_cmd_snapshot!(
-        biff(["span", "balance", "-l", "hour", "0.000277777h"]),
+        bttf(["span", "balance", "-l", "hour", "0.000277777h"]),
         @r"
     success: true
     exit_code: 0

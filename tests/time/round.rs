@@ -1,7 +1,7 @@
 use crate::command::assert_cmd_snapshot;
 
 fn round() -> crate::command::Command {
-    crate::biff(["time", "round"])
+    crate::bttf(["time", "round"])
 }
 
 #[test]

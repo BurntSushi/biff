@@ -16,10 +16,10 @@ This command accepts either one span first and then one or more datetimes, or
 one datetime first and then one or more spans.
 
 USAGE:
-    biff time add <span> <datetime>...
-    biff time add <span> < line delimited <datetime>
-    biff time add <datetime> <span>...
-    biff time add <datatime> < line delimited <span>
+    bttf time add <span> <datetime>...
+    bttf time add <span> < line delimited <datetime>
+    bttf time add <datetime> <span>...
+    bttf time add <datatime> < line delimited <span>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -27,26 +27,26 @@ TIP:
 EXAMPLES:
     Add 1 day to the current time:
 
-        biff time add 1d now
+        bttf time add 1d now
 
     %snip-start%
 
     Or, equivalently:
 
-        biff time add now 1d
+        bttf time add now 1d
 
     Subtract 1 day from the current time:
 
-        biff time add -1d now
+        bttf time add -1d now
 
     Add 1 month to a particular date:
 
-        biff time add 1mo 2024-01-31
+        bttf time add 1mo 2024-01-31
 
     This command is time zone aware, even in extreme circumstances. For
     example, in 2011, Apia didn't have a December 30:
 
-        $ biff time add '2011-12-31[Pacific/Apia]' -1ns
+        $ bttf time add '2011-12-31[Pacific/Apia]' -1ns
         2011-12-29T23:59:59.999999999-10:00[Pacific/Apia]
 
     %snip-end%

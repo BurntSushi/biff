@@ -178,9 +178,9 @@ jobs:
       run: |
         ${{ env.CARGO }} build --verbose --features locale --profile release-lto ${{ env.TARGET_FLAGS }}
         if [ "${{ matrix.os }}" = "windows-latest" ]; then
-          bin="target/${{ matrix.target }}/release-lto/biff.exe"
+          bin="target/${{ matrix.target }}/release-lto/bttf.exe"
         else
-          bin="target/${{ matrix.target }}/release-lto/biff"
+          bin="target/${{ matrix.target }}/release-lto/bttf"
         fi
         echo "BIN=$bin" >> $GITHUB_ENV
 
@@ -207,7 +207,7 @@ jobs:
       shell: bash
       run: |
         version="${{ needs.create-release.outputs.version }}"
-        echo "ARCHIVE=biff-$version-${{ matrix.target }}" >> $GITHUB_ENV
+        echo "ARCHIVE=bttf-$version-${{ matrix.target }}" >> $GITHUB_ENV
 
     - name: Create directory for archive
       shell: bash

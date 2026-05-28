@@ -5,7 +5,7 @@ use crate::{
     parse::{BytesExt, FromBytes},
 };
 
-/// Represents a biff duration.
+/// Represents a bttf duration.
 ///
 /// This is just a wrapper around `jiff::Span`, which does most of the heavy
 /// lifting for us. The wrapper exists so that we can keep track of what the
@@ -16,7 +16,7 @@ use crate::{
 /// `jiff::Span`.
 ///
 /// This type exists primarily as a target for trait impls for tailoring
-/// behavior specific to `biff`.
+/// behavior specific to `bttf`.
 #[derive(Clone, Debug)]
 pub struct TimeSpan {
     /// The actual parsed span. i.e., The thing we operate on.
@@ -41,7 +41,7 @@ Spans can either be passed as positional arguments or as line delimited data on
 stdin, but not both. That is, spans will only be read from stdin where there
 are no spans provided as positional arguments.
 
-Spans describe a duration of time. In Biff, both calendar (years, months,
+Spans describe a duration of time. In bttf, both calendar (years, months,
 weeks, days) and physical time (hours, minutes, seconds, milliseconds,
 microseconds, nanoseconds) are supported.
 
@@ -52,7 +52,7 @@ ISO 8601, e.g., `PT1H2M3S`, `-P1D`, `P1Y2MT5H`
 The "friendly" format, e.g., `1h2m3s`, `-1d`, `1 year, 2 months, 5 hours ago`
 
 The ISO 8601 format comes from a standard and is widely supported. In contrast,
-the "friendly" format is a bespoke format defined by Biff's underlying datetime
+the "friendly" format is a bespoke format defined by bttf's underlying datetime
 library (called Jiff). The "friendly" format is meant to capture a superset of
 similar ad hoc formats supported in various places over the years. The benefit
 of the "friendly" format is that it's terser, more flexible and arguably easier

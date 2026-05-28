@@ -6,7 +6,7 @@ const USAGE: &'static str = "\
 Commands for working with time zones.
 
 USAGE:
-    biff tz <command> ...
+    bttf tz <command> ...
 
 COMMANDS:
     compatible  List time zones compatible with an RFC 3339 timestamp

@@ -1,7 +1,7 @@
 use crate::command::assert_cmd_snapshot;
 
 fn add() -> crate::command::Command {
-    crate::biff(["time", "add"])
+    crate::bttf(["time", "add"])
 }
 
 /// Test that we can use a span as the first positional argument.
@@ -180,7 +180,7 @@ fn dst_calendar_versus_time() {
     );
 }
 
-/// When adding a span to a datetime, if we land in a gap or a fold, Biff will
+/// When adding a span to a datetime, if we land in a gap or a fold, bttf will
 /// disambiguate automatically.
 #[test]
 fn disambiguate_automatically() {
@@ -213,9 +213,9 @@ fn disambiguate_automatically() {
 
 /// Tests some month arithmetic.
 ///
-/// Biff isn't the one implementing these semantics. They are the domain of
+/// bttf isn't the one implementing these semantics. They are the domain of
 /// Jiff. I wanted to write tests here though because I think it's likely
-/// that `biff time add` will want to grow a way to change how month
+/// that `bttf time add` will want to grow a way to change how month
 /// arithmetic is done.
 #[test]
 fn month_arithmetic() {

@@ -1,9 +1,9 @@
-use crate::{biff, command::assert_cmd_snapshot};
+use crate::{bttf, command::assert_cmd_snapshot};
 
 #[test]
 fn basic() {
     assert_cmd_snapshot!(
-        biff(["tz", "compatible", "2025-03-09T17:00+10:30"]),
+        bttf(["tz", "compatible", "2025-03-09T17:00+10:30"]),
         @r"
     success: true
     exit_code: 0
@@ -21,7 +21,7 @@ fn basic() {
 #[test]
 fn unknown() {
     assert_cmd_snapshot!(
-        biff(["tz", "compatible", "2025-03-09T17:00Z"]),
+        bttf(["tz", "compatible", "2025-03-09T17:00Z"]),
         @r"
     success: true
     exit_code: 0
@@ -33,7 +33,7 @@ fn unknown() {
     );
 
     assert_cmd_snapshot!(
-        biff(["tz", "compatible", "2025-03-09T17:00-00:00"]),
+        bttf(["tz", "compatible", "2025-03-09T17:00-00:00"]),
         @r"
     success: true
     exit_code: 0
@@ -54,7 +54,7 @@ fn utc() {
         filters => vec![(r"localtime\n", "")],
     }, {
         assert_cmd_snapshot!(
-            biff(["tz", "compatible", "2025-03-09T17:00+00:00"]),
+            bttf(["tz", "compatible", "2025-03-09T17:00+00:00"]),
             @r"
         success: true
         exit_code: 0
@@ -127,7 +127,7 @@ fn utc() {
         filters => vec![(r"localtime\n", "")],
     }, {
         assert_cmd_snapshot!(
-            biff(["tz", "compatible", "2025-03-09T17:00[UTC]"]),
+            bttf(["tz", "compatible", "2025-03-09T17:00[UTC]"]),
             @r"
         success: true
         exit_code: 0

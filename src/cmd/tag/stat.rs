@@ -19,12 +19,12 @@ data.
 
 Note that it is not guaranteed that any particular metadata selection will
 return correct or even "sensible" values. This largely depends on platform,
-configuration and file system support. Biff just asks for the corresponding
+configuration and file system support. bttf just asks for the corresponding
 metadata and uses it as given.
 
 USAGE:
-    biff tag stat <kinds> <path>...
-    biff tag stat <kinds> < line delimited <path>
+    bttf tag stat <kinds> <path>...
+    bttf tag stat <kinds> < line delimited <path>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -32,7 +32,7 @@ TIP:
 EXAMPLES:
     Extract the datetime each file was created in a directory tree:
 
-        find ./ | biff tag stat created
+        find ./ | bttf tag stat created
 
 REQUIRED ARGUMENTS:
 %args%

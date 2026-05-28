@@ -16,13 +16,13 @@ makes the operation reversible. (See below for examples.)
 This accepts one or more datetimes as positional arguments. When no positional
 arguments are given, then line delimited datetimes are read from stdin.
 
-This is like `biff span until`, except the order of the arguments are flipped.
+This is like `bttf span until`, except the order of the arguments are flipped.
 Or stated differently, the span returned is the negation of what would be
-returned by `biff span until`.
+returned by `bttf span until`.
 
 USAGE:
-    biff span since <datetime>...
-    biff span since < line delimited <datatime>
+    bttf span since <datetime>...
+    bttf span since < line delimited <datatime>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -31,30 +31,30 @@ EXAMPLES:
     Return the amount of time since the New England Patriots won their most
     recent Super Bowl (as of 2025):
 
-        $ biff span since '2019-02-03T22:30-05[America/New_York]'
+        $ bttf span since '2019-02-03T22:30-05[America/New_York]'
         53638h 19m 34s 582ms 291µs 768ns
 
     %snip-start%
 
     Or, ask for calendar units up to years:
 
-        $ biff span since -l year '2019-02-03T22:30-05[America/New_York]'
+        $ bttf span since -l year '2019-02-03T22:30-05[America/New_York]'
         6y 1mo 14d 23h 19m 57s 554ms 37µs 46ns
 
     Units up to hours are returned by default so that operations are
     reversible:
 
-        $ biff span since -r 2024-04-30 2024-05-31
+        $ bttf span since -r 2024-04-30 2024-05-31
         744h ago
-        $ biff time add 744h 2024-04-30
+        $ bttf time add 744h 2024-04-30
         2024-05-31T00:00:00-04:00[America/New_York]
 
     In contrast, when using calendar units, reversibility is no longer
     guaranteed:
 
-        $ biff span since -l month -r 2024-05-31 2024-04-30
+        $ bttf span since -l month -r 2024-05-31 2024-04-30
         1mo
-        $ biff time add 1mo 2024-04-30
+        $ bttf time add 1mo 2024-04-30
         2024-05-30T00:00:00-04:00[America/New_York]
 
     %snip-end%

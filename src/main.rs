@@ -26,10 +26,10 @@ mod weekdate;
 static TZ: LazyLock<TimeZone> = LazyLock::new(|| TimeZone::system());
 
 static NOW: LazyLock<Zoned> = LazyLock::new(|| {
-    let ts = match read_env_biff_now() {
+    let ts = match read_env_bttf_now() {
         Ok(Some(ts)) => {
             log::trace!(
-                "setting current time to `{ts}` from `BIFF_NOW` \
+                "setting current time to `{ts}` from `BTTF_NOW` \
                  environment variable",
             );
             ts
@@ -37,7 +37,7 @@ static NOW: LazyLock<Zoned> = LazyLock::new(|| {
         Ok(None) => {
             let now = Timestamp::now();
             log::trace!(
-                "`BIFF_NOW` environment variable not set, using \
+                "`BTTF_NOW` environment variable not set, using \
                  current time `{now}`",
             );
             now
@@ -45,7 +45,7 @@ static NOW: LazyLock<Zoned> = LazyLock::new(|| {
         Err(err) => {
             let now = Timestamp::now();
             log::warn!(
-                "reading `BIFF_NOW` failed, using current time \
+                "reading `BTTF_NOW` failed, using current time \
                  `{now}`: {err:#}",
             );
             now
@@ -55,10 +55,10 @@ static NOW: LazyLock<Zoned> = LazyLock::new(|| {
 });
 
 static LOCALE: LazyLock<Locale> = LazyLock::new(|| {
-    let locale = match read_env_biff_locale() {
+    let locale = match read_env_bttf_locale() {
         Ok(Some(locale)) => {
             log::trace!(
-                "setting locale to `{locale}` from `BIFF_LOCALE` \
+                "setting locale to `{locale}` from `BTTF_LOCALE` \
                  environment variable",
             );
             locale
@@ -66,7 +66,7 @@ static LOCALE: LazyLock<Locale> = LazyLock::new(|| {
         Ok(None) => {
             let locale = Locale::unknown();
             log::trace!(
-                "`BIFF_LOCALE` environment variable not set, using \
+                "`BTTF_LOCALE` environment variable not set, using \
                  `unknown` locale",
             );
             locale
@@ -74,7 +74,7 @@ static LOCALE: LazyLock<Locale> = LazyLock::new(|| {
         Err(err) => {
             let locale = Locale::unknown();
             log::warn!(
-                "reading `BIFF_LOCALE` failed, using unknown locale \
+                "reading `BTTF_LOCALE` failed, using unknown locale \
                  `{locale}`: {err:#}",
             );
             locale
@@ -130,7 +130,7 @@ fn main() -> ExitCode {
 }
 
 fn run() -> anyhow::Result<ExitCode> {
-    let rustlog = env::var("BIFF_LOG").unwrap_or_else(|_| String::new());
+    let rustlog = env::var("BTTF_LOG").unwrap_or_else(|_| String::new());
     let level = match &*rustlog {
         "" | "off" => log::LevelFilter::Off,
         "error" => log::LevelFilter::Error,
@@ -153,29 +153,29 @@ fn run() -> anyhow::Result<ExitCode> {
     Ok(ExitCode::SUCCESS)
 }
 
-fn read_env_biff_now() -> anyhow::Result<Option<Timestamp>> {
-    let Some(val) = std::env::var_os("BIFF_NOW") else { return Ok(None) };
+fn read_env_bttf_now() -> anyhow::Result<Option<Timestamp>> {
+    let Some(val) = std::env::var_os("BTTF_NOW") else { return Ok(None) };
     let Some(val) = val.to_str() else {
         anyhow::bail!(
-            "`BIFF_NOW` environment variable is not valid UTF-8: {val:?}"
+            "`BTTF_NOW` environment variable is not valid UTF-8: {val:?}"
         )
     };
     val.parse::<Timestamp>()
         .context(
-            "`BIFF_NOW` environment variable is not a valid RFC 3339 timestamp",
+            "`BTTF_NOW` environment variable is not a valid RFC 3339 timestamp",
         )
         .map(Some)
 }
 
-fn read_env_biff_locale() -> anyhow::Result<Option<Locale>> {
-    let Some(val) = std::env::var_os("BIFF_LOCALE") else { return Ok(None) };
+fn read_env_bttf_locale() -> anyhow::Result<Option<Locale>> {
+    let Some(val) = std::env::var_os("BTTF_LOCALE") else { return Ok(None) };
     let Some(val) = val.to_str() else {
         anyhow::bail!(
-            "`BIFF_LOCALE` environment variable is not valid UTF-8: {val:?}"
+            "`BTTF_LOCALE` environment variable is not valid UTF-8: {val:?}"
         )
     };
     let locale = val.parse().with_context(|| {
-        format!("failed to parse `BIFF_LOCALE` environment variable")
+        format!("failed to parse `BTTF_LOCALE` environment variable")
     })?;
     Ok(Some(locale))
 }

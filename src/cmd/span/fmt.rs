@@ -20,17 +20,17 @@ formatting of spans. This includes, but is not limited to, the verbosity of
 unit designators, spacing and precision.
 
 All spans printed by this command are valid instantiations of the "friendly"
-format. That is, any output of this command can be parsed anywhere Biff
+format. That is, any output of this command can be parsed anywhere bttf
 expects a span.
 
-To format a span as an ISO 8601 duration, use `biff span iso8601`.
+To format a span as an ISO 8601 duration, use `bttf span iso8601`.
 
 Full details on the friendly format can be found here:
 https://docs.rs/jiff/0.2/jiff/fmt/friendly/index.html
 
 USAGE:
-    biff span fmt <span>...
-    biff span fmt < line delimited <span>
+    bttf span fmt <span>...
+    bttf span fmt < line delimited <span>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -38,24 +38,24 @@ TIP:
 EXAMPLES:
     To print a verbose span with nice spacing:
 
-        $ biff span fmt '75y5mo22d' -s units-and-designators -d verbose --comma
+        $ bttf span fmt '75y5mo22d' -s units-and-designators -d verbose --comma
         75 years, 5 months, 22 days
 
     %snip-start%
 
     To use fractional seconds instead of writing out sub-second units:
 
-        $ biff span fmt '30s123ms456us789ns' -f secs
+        $ bttf span fmt '30s123ms456us789ns' -f secs
         30.123456789s
 
     One can also control precision:
 
-        $ biff span fmt '30s123ms456us789ns' -f secs --precision 3
+        $ bttf span fmt '30s123ms456us789ns' -f secs --precision 3
         30.123s
 
     Or use an `HH:MM:SS` format for the time units:
 
-        $ biff span fmt '5d2h30m10s' --hms
+        $ bttf span fmt '5d2h30m10s' --hms
         5d 02:30:10
 
     %snip-end%
@@ -379,7 +379,7 @@ The default value for this flag is `auto`. The possible values and their
 behavior are:
 
 `auto`: No fractional units are written unless `--hms` is provided. In which
-case, Biff behaves as if `--fractional=second` was given.
+case, bttf behaves as if `--fractional=second` was given.
 
 Otherwise, the value must be a time unit greater than nanoseconds. Here are the
 different ways that each time unit can be spelled:
@@ -394,7 +394,7 @@ milliseconds, millisecond, millis, milli, msecs, msec, ms
 
 microseconds, microsecond, micros, micro, usecs, µsecs, usec, µsec, us, µs
 
-Be warned that, at present, the "friendly" duration format that Biff uses is
+Be warned that, at present, the "friendly" duration format that bttf uses is
 limited to 9 digits after the decimal point. This means that if you use
 hours or minutes as your fractional unit, the resulting formatted span may
 have precision loss.

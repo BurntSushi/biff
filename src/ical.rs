@@ -19,7 +19,7 @@ use crate::{
 };
 
 // The representation for recurrence rules seems quite fat overall. I don't
-// think it matters much for Biff specifically, but if this were to be moved
+// think it matters much for bttf specifically, but if this were to be moved
 // into a library, it might be worth trying to slim this down. Maybe there's a
 // way to combine each of the lists into one big one, since they're generally
 // expected to be small (or mostly empty most of the time).

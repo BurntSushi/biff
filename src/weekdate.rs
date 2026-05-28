@@ -187,7 +187,7 @@ fn week_start_of_year(start: Weekday, year: i16) -> anyhow::Result<Date> {
     date_in_first_week.checked_sub(span).with_context(|| {
         format!(
             "first date of `{year}` for weeks starting with \
-             {start:?} is out of Biff's supported range",
+             {start:?} is out of bttf's supported range",
         )
     })
 }

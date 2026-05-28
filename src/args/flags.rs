@@ -152,7 +152,7 @@ impl FromBytes for DateTimeOrTimeZone {
     }
 }
 
-/// Provides parsing for biff's possible set of formats for a datetime.
+/// Provides parsing for bttf's possible set of formats for a datetime.
 #[derive(Clone, Debug, Default)]
 pub enum Format {
     /// Formats or parses as an RFC 9557 timestamp.
@@ -216,7 +216,7 @@ Here is the full set of supported formatting directives:
 
 `%C`: The century of the year. No padding.
 
-`%c`: The date and clock time via the current locale set by the `BIFF_LOCALE`
+`%c`: The date and clock time via the current locale set by the `BTTF_LOCALE`
 environment variable. Supported when formatting only.
 
 `%D`: Equivalent to `%m/%d/%y`.
@@ -262,7 +262,7 @@ padded.
 
 `%R`: Equivalent to `%H:%M`.
 
-`%r`: The 12-hour clock time via the current locale set by the `BIFF_LOCALE`
+`%r`: The 12-hour clock time via the current locale set by the `BTTF_LOCALE`
 environment variable. Supported when formatting only.
 
 `%S`: The second. Zero padded.
@@ -285,10 +285,10 @@ padded.
 
 `%w`: The day of the week beginning with Sunday at `0`.
 
-`%X`: The clock time via the current locale set by the `BIFF_LOCALE`
+`%X`: The clock time via the current locale set by the `BTTF_LOCALE`
 environment variable. Supported when formatting only.
 
-`%x`: The date via the current locale set by the `BIFF_LOCALE`
+`%x`: The date via the current locale set by the `BTTF_LOCALE`
 environment variable. Supported when formatting only.
 
 `%Y`: A full year, including century. Zero padded to 4 digits.
@@ -339,7 +339,7 @@ then `%f` will always emit at least one digit, even if it's zero. But `%.f`
 will emit the empty string when the fractional component is zero. Otherwise,
 it will include the leading `.`. When using a precision setting, truncation
 is used. If you need a different rounding mode, you should use a command like
-`biff time round` first before formatting.
+`bttf time round` first before formatting.
 "#,
     );
 
@@ -364,9 +364,9 @@ RFC 9110: `Sat, 15 Mar 2025 14:23:00 GMT`
 
 Flexible: `next sat`, `9pm 1 week ago`
 
-The flexible format accepts the same relative datetime format that Biff accepts
+The flexible format accepts the same relative datetime format that bttf accepts
 anywhere users can provide datetimes on the command line (either via positional
-or flag arguments). In order to avoid footguns, Biff specifically prohibits
+or flag arguments). In order to avoid footguns, bttf specifically prohibits
 the relative datetime format when datetimes are provided by stdin. Instead,
 datetimes on stdin must always be unambiguous instants in time (via RFC 9557,
 RFC 3339, RFC 2822 or RFC 9110). But this command permits explicitly opting
@@ -569,7 +569,7 @@ default, `%d` will only try to consume at most 2 digits.
             Format::Rfc9557 => TEMPORAL_PARSER.parse_zoned(dt)?,
             Format::Rfc3339 => {
                 // This is a little weird, but we try to stick specifically
-                // to RFC 3339 here. Since Biff's "default" datetime type
+                // to RFC 3339 here. Since bttf's "default" datetime type
                 // is RFC 9557, and we don't want to lose the offset in the
                 // RFC 3339 timestamp, we have to do a little dance to keep
                 // it around.
@@ -578,7 +578,7 @@ default, `%d` will only try to consume at most 2 digits.
                 // not what you want to do. It makes it very easy to do
                 // arithmetic incorrectly.
                 //
-                // Biff does this because the only real alternative is to
+                // bttf does this because the only real alternative is to
                 // return an error or drop information. But I feel like that
                 // could be more surprising. And users can opt into dropping
                 // information or re-interpreting instants in a different
@@ -1573,7 +1573,7 @@ impl MemoryMapper {
     /// # Safety
     ///
     /// Callers should ensure or must assume that the file at the given path
-    /// is not mutated while in use by Biff. The "caller" in this context may
+    /// is not mutated while in use by bttf. The "caller" in this context may
     /// be an end user. In which case, end users should use `--no-mmap` if
     /// they cannot make this assurance. Otherwise, this risks undefined
     /// behavior.
@@ -1649,11 +1649,11 @@ avoid reading large files on to the heap. The latter would otherwise be
 required in order to run regexes on file contents, since the regex engine does
 not support stream searching.
 
-Note that even when enabled, memory maps are not guaranteed to be used. Biff
+Note that even when enabled, memory maps are not guaranteed to be used. bttf
 will still use heuristics to determine when or if they ought to be enabled.
 
 Use the `--no-mmap` flag to forcefully disable memory maps. This is useful if
-Biff's heuristics aren't good enough, or if you don't want to be susceptible to
+bttf's heuristics aren't good enough, or if you don't want to be susceptible to
 bugs instigated by the use of file backed memory maps.
 "#,
         );
@@ -1664,13 +1664,13 @@ bugs instigated by the use of file backed memory maps.
             r#"
 Disable reading files via memory maps.
 
-This is useful for cases where using memory maps might be slower. Biff already
+This is useful for cases where using memory maps might be slower. bttf already
 uses heuristics to detect when it thinks memory maps will be slower, but an
 end user might know better.
 
 This is also useful for avoiding bugs instigated by using memory maps, such as
 files being mutated or truncated while searching. This could cause a `SIGBUS`
-and unceremoniously terminate the Biff process.
+and unceremoniously terminate the bttf process.
 "#,
         );
 

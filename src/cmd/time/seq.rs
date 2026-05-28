@@ -21,11 +21,11 @@ given starting point. If a starting point is not given, then the current time
 is used.
 
 Unless the `-c/--count` or `--until` flags are used, this command will
-generate datetimes until Biff's maximum is reached. In lieu of `-c/--count`,
+generate datetimes until bttf's maximum is reached. In lieu of `-c/--count`,
 users may also choose to use programs like `head` to limit the output.
 
 USAGE:
-    biff time seq <frequency> <datetime>
+    bttf time seq <frequency> <datetime>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -33,7 +33,7 @@ TIP:
 EXAMPLES:
     Print all Friday the 13th occurrences for the next 3 years:
 
-        $ biff time seq monthly --until 3y -w fri -d 13
+        $ bttf time seq monthly --until 3y -w fri -d 13
         2025-06-13T20:57:20.062111223-04:00[America/New_York]
         2026-02-13T20:57:20.062111223-05:00[America/New_York]
         2026-03-13T20:57:20.062111223-04:00[America/New_York]
@@ -45,7 +45,7 @@ EXAMPLES:
     Schedule my cat's medication, every Monday, Wednesday and Friday with
     breakfest, for the next two weeks, starting tomorrow:
 
-        $ biff time seq daily -w mon,wed,fri -H 8 -M 30 --until 2wks tomorrow
+        $ bttf time seq daily -w mon,wed,fri -H 8 -M 30 --until 2wks tomorrow
         2025-04-18T08:30:00-04:00[America/New_York]
         2025-04-21T08:30:00-04:00[America/New_York]
         2025-04-23T08:30:00-04:00[America/New_York]
@@ -55,13 +55,13 @@ EXAMPLES:
 
     Find the last work-day of the current month:
 
-        $ biff time seq monthly --count 1 -w mon..fri --set-position -1
+        $ bttf time seq monthly --count 1 -w mon..fri --set-position -1
         2025-04-30T21:27:39.66489192-04:00[America/New_York]
 
     Find the last Saturday every other month, starting with the current month,
     for the next year:
 
-        $ biff time seq monthly -i2 -w -1-sat --until 1y
+        $ bttf time seq monthly -i2 -w -1-sat --until 1y
         2025-04-26T21:44:16.816662841-04:00[America/New_York]
         2025-06-28T21:44:16.816662841-04:00[America/New_York]
         2025-08-30T21:44:16.816662841-04:00[America/New_York]
@@ -71,7 +71,7 @@ EXAMPLES:
 
     Generate every day remaining in the current month:
 
-        $ biff time seq daily --until $(biff time end-of month now) today
+        $ bttf time seq daily --until $(bttf time end-of month now) today
         2025-04-17T00:00:00-04:00[America/New_York]
         2025-04-18T00:00:00-04:00[America/New_York]
         2025-04-19T00:00:00-04:00[America/New_York]
@@ -89,7 +89,7 @@ EXAMPLES:
 
     Or every day in the current month, including days in the past:
 
-        $ biff time seq daily --until $(biff time end-of month now) $(biff time start-of month today)
+        $ bttf time seq daily --until $(bttf time end-of month now) $(bttf time start-of month today)
         2025-04-01T00:00:00-04:00[America/New_York]
         2025-04-02T00:00:00-04:00[America/New_York]
         2025-04-03T00:00:00-04:00[America/New_York]

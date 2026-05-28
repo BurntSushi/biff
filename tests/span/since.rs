@@ -1,7 +1,7 @@
 use crate::command::assert_cmd_snapshot;
 
 fn since() -> crate::command::Command {
-    crate::biff(["span", "since"])
+    crate::bttf(["span", "since"])
 }
 
 #[test]

@@ -13,15 +13,15 @@ Format spans into the ISO 8601 duration format.
 This will permit weeks to be combined with other units, which is not permitted
 in the ISO 8601 duration format. However, it is permitted in Temporal's
 extension to the ISO 8601 duration format. If you need strict ISO 8601
-compatibility, you should use `biff span balance` or `biff span round` to
+compatibility, you should use `bttf span balance` or `bttf span round` to
 remove weeks from your span before formatting them as ISO 8601 durations.
 
 To format a span into a more friendly and "human" readable format, use
-`biff span fmt` instead.
+`bttf span fmt` instead.
 
 USAGE:
-    biff span iso8601 <span>...
-    biff span iso8601 < line delimited <span>
+    bttf span iso8601 <span>...
+    bttf span iso8601 < line delimited <span>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -29,7 +29,7 @@ TIP:
 EXAMPLES:
     To print a span in the ISO 8601 duration format:
 
-        $ biff span iso8601 75y5mo22d5h30m12s
+        $ bttf span iso8601 75y5mo22d5h30m12s
         P75Y5M22DT5H30M12S
 
     %snip-start%
@@ -37,21 +37,21 @@ EXAMPLES:
     One can make the unit designators lowercase, which can improve
     readability at the expense of portability:
 
-        $ biff span iso8601 -l 75y5mo22d5h30m12s
+        $ bttf span iso8601 -l 75y5mo22d5h30m12s
         P75y5m22dT5h30m12s
 
     ISO 8601 durations do not have units smaller than seconds. Therefore,
     milliseconds, microseconds and nanoseconds are all represented as
     fractional seconds:
 
-        $ biff span iso8601 123ms456us789ns
+        $ bttf span iso8601 123ms456us789ns
         PT0.123456789S
 
     This does mean that, unlike the friendly format, not all spans will
     roundtrip without some loss in how the span is expressed. This example
     loses the fact that `2 seconds` is expressed in units of milliseconds:
 
-        $ biff span iso8601 2000ms
+        $ bttf span iso8601 2000ms
         PT2S
 
     %snip-end%

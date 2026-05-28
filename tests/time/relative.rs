@@ -1,7 +1,7 @@
 use crate::command::assert_cmd_snapshot;
 
 fn relative() -> crate::command::Command {
-    crate::biff(["time", "relative"])
+    crate::bttf(["time", "relative"])
 }
 
 #[test]

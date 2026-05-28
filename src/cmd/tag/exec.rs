@@ -23,7 +23,7 @@ found in an argument is replaced with the file path. If no argument contains
 `{}`, then the file path is added as the final argument to the command.
 
 USAGE:
-    biff tag exec <command> [<arg>]... < line delimited <path>
+    bttf tag exec <command> [<arg>]... < line delimited <path>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -31,7 +31,7 @@ TIP:
 EXAMPLES:
     Tag each file in a git repository with its last commit datetime:
 
-        git ls-files | biff tag exec git log -n1 --format='%cI'
+        git ls-files | bttf tag exec git log -n1 --format='%cI'
 
 POSITIONAL ARGUMENTS:
 %args%

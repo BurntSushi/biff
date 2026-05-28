@@ -9,7 +9,7 @@ use anstyle::{AnsiColor, Style};
 /// A theme that indicates how output should be styled.
 ///
 /// Each theme comes with a set of styles for particular output components of
-/// Biff. The getter methods on a theme provide these styles on a per-component
+/// bttf. The getter methods on a theme provide these styles on a per-component
 /// basis.
 ///
 /// The styles returned may be completely unstyled, for example, when no theme

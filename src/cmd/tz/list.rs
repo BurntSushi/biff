@@ -10,15 +10,15 @@ List all available time zones as IANA time zone identifiers.
 
 On Unix, this list will usually come from the time zones available in
 `/usr/share/zoneinfo`. On other platforms, or Unix systems without a time zone
-database, the list will come from time zones bundled with Biff itself.
+database, the list will come from time zones bundled with bttf itself.
 
-Users may control where Biff looks for a time zone database via the `TZDIR`
+Users may control where bttf looks for a time zone database via the `TZDIR`
 environment variable.
 
 The list is printed in lexicographic order.
 
 USAGE:
-    biff tz list
+    bttf tz list
 
 TIP:
     use -h for short docs and --help for long docs

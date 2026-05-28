@@ -1,7 +1,7 @@
-use crate::{biff, command::assert_cmd_snapshot};
+use crate::{bttf, command::assert_cmd_snapshot};
 
 fn round() -> crate::command::Command {
-    crate::biff(["span", "round"])
+    crate::bttf(["span", "round"])
 }
 
 #[test]
@@ -37,7 +37,7 @@ fn year_leap() {
 #[test]
 fn since_then_round() {
     assert_cmd_snapshot!(
-        biff(["span", "since", "2024-07-19T00:29:31.123456789"]).pipe(
+        bttf(["span", "since", "2024-07-19T00:29:31.123456789"]).pipe(
             round().args(["-sns"]),
         ),
         @r"
@@ -51,7 +51,7 @@ fn since_then_round() {
     );
 
     assert_cmd_snapshot!(
-        biff(["span", "since", "2024-07-19T00:29:31.123456789"]).pipe(
+        bttf(["span", "since", "2024-07-19T00:29:31.123456789"]).pipe(
             round().args(["-sus"]),
         ),
         @r"
@@ -65,7 +65,7 @@ fn since_then_round() {
     );
 
     assert_cmd_snapshot!(
-        biff(["span", "since", "2024-07-19T00:29:31.123456789"]).pipe(
+        bttf(["span", "since", "2024-07-19T00:29:31.123456789"]).pipe(
             round().args(["-sms"]),
         ),
         @r"
@@ -79,7 +79,7 @@ fn since_then_round() {
     );
 
     assert_cmd_snapshot!(
-        biff(["span", "since", "2024-07-19T00:29:31.123456789"]).pipe(
+        bttf(["span", "since", "2024-07-19T00:29:31.123456789"]).pipe(
             round().args(["-ssecs"]),
         ),
         @r"
@@ -93,7 +93,7 @@ fn since_then_round() {
     );
 
     assert_cmd_snapshot!(
-        biff(["span", "since", "2024-07-19T00:29:31.123456789"]).pipe(
+        bttf(["span", "since", "2024-07-19T00:29:31.123456789"]).pipe(
             round().args(["-smin"]),
         ),
         @r"
@@ -107,7 +107,7 @@ fn since_then_round() {
     );
 
     assert_cmd_snapshot!(
-        biff(["span", "since", "2024-07-19T00:29:31.123456789"]).pipe(
+        bttf(["span", "since", "2024-07-19T00:29:31.123456789"]).pipe(
             round().args(["-shour"]),
         ),
         @r"
@@ -121,7 +121,7 @@ fn since_then_round() {
     );
 
     assert_cmd_snapshot!(
-        biff(["span", "since", "2024-07-19T00:29:31.123456789"]).pipe(
+        bttf(["span", "since", "2024-07-19T00:29:31.123456789"]).pipe(
             round().args(["-sday"]),
         ),
         @r"
@@ -135,7 +135,7 @@ fn since_then_round() {
     );
 
     assert_cmd_snapshot!(
-        biff(["span", "since", "2024-07-19T00:29:31.123456789"]).pipe(
+        bttf(["span", "since", "2024-07-19T00:29:31.123456789"]).pipe(
             round().args(["-sday", "-mtrunc"]),
         ),
         @r"

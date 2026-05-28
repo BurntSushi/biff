@@ -8,7 +8,7 @@ const USAGE: &'static str = "\
 A simple utility for doing datetime arithmetic, parsing and formatting.
 
 USAGE:
-    biff <command> ...
+    bttf <command> ...
 
 COMMANDS:
     span   Tools for manipulating time spans/durations
@@ -19,7 +19,7 @@ COMMANDS:
 ";
 
 pub fn run(p: &mut lexopt::Parser) -> anyhow::Result<()> {
-    // For convenience, running `biff` with no arguments prints the current
+    // For convenience, running `bttf` with no arguments prints the current
     // time in a somewhat nice format (roughly matches `date` on my system).
     if p.try_raw_args().map_or(false, |args| args.as_slice().is_empty()) {
         use crate::{args::flags::Format, datetime::DateTime};

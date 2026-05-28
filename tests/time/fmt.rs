@@ -1,7 +1,7 @@
 use crate::command::assert_cmd_snapshot;
 
 fn fmt() -> crate::command::Command {
-    crate::biff(["time", "fmt"])
+    crate::bttf(["time", "fmt"])
 }
 
 /// Test that passing some special strings on the CLI works.
@@ -83,7 +83,7 @@ fn span_as_relative_datetime() {
     );
 }
 
-/// Test Biff's "Intuitive" flexible relative datetime format.
+/// Test bttf's "Intuitive" flexible relative datetime format.
 #[test]
 fn intuitive_relative_datetime() {
     // Different ways to spell Saturday.

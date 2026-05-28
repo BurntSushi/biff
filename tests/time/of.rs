@@ -1,11 +1,11 @@
 use crate::command::assert_cmd_snapshot;
 
 fn start() -> crate::command::Command {
-    crate::biff(["time", "start-of"])
+    crate::bttf(["time", "start-of"])
 }
 
 fn end() -> crate::command::Command {
-    crate::biff(["time", "end-of"])
+    crate::bttf(["time", "end-of"])
 }
 
 #[test]

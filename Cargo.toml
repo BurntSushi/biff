@@ -1,5 +1,5 @@
 [package]
-name = "biff-datetime-cli"
+name = "bttf"
 version = "0.1.3"  #:version
 authors = ["Andrew Gallant <jamslam@gmail.com>"]
 description = """
@@ -14,10 +14,10 @@ A non-exhaustive list of features:
 * The ability to tag arbitrary data in a JSON lines format with datetimes.
   This works great for reformatting or localizing timestamps in log files.
 * Datetimes can be written in a variety of flexible formats. For example,
-  `biff time fmt '5pm last thursday'`.
+  `bttf time fmt '5pm last thursday'`.
 * Compare and sort datetimes.
 """
-repository = "https://github.com/BurntSushi/biff"
+repository = "https://github.com/BurntSushi/bttf"
 keywords = ["date", "time", "jiff", "zone", "calendar"]
 categories = ["command-line-utilities", "date-and-time"]
 license = "Unlicense OR MIT"
@@ -29,7 +29,7 @@ exclude = [
 ]
 
 [[bin]]
-name = "biff"
+name = "bttf"
 path = "src/main.rs"
 
 [features]

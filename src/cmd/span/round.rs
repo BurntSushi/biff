@@ -20,8 +20,8 @@ This accepts one or more spans as positional arguments. When no positional
 arguments are given, then line delimited spans are read from stdin.
 
 USAGE:
-    biff span round <span>...
-    biff span round < line delimited <span>
+    bttf span round <span>...
+    bttf span round < line delimited <span>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -30,13 +30,13 @@ EXAMPLES:
     Consider a span like `2h30m10s`. One can round it to the nearest minute
     with this command:
 
-        $ biff span round 2h30m10s -s minute
+        $ bttf span round 2h30m10s -s minute
         2h 30m
 
     One can also change the rounding mode. This command defaults to rounding
     like how you were probably taught in school, but other modes are available:
 
-        $ biff span round 2h30m10s -s minute -m expand
+        $ bttf span round 2h30m10s -s minute -m expand
         2h 31m
 
     %snip-start%
@@ -45,31 +45,31 @@ EXAMPLES:
     friendly. For example, getting a span since some date from now can result
     in somewhat unwieldy spans:
 
-        $ biff span since 2025-03-01
+        $ bttf span since 2025-03-01
         781h 16m 23s 579ms 682µs 329ns ago
 
     One can balance them to make them a bit nicer:
 
-        $ biff span since 2025-03-01 | biff span balance
+        $ bttf span since 2025-03-01 | bttf span balance
         1mo 1d 14h 17m 31s 692ms 177µs 997ns ago
 
     But perhaps you don't care about precision beneath minutes. You can
     re-balance the span and round it all in one go:
 
-        $ biff span since 2025-03-01 | biff span round -s minutes -l years
+        $ bttf span since 2025-03-01 | bttf span round -s minutes -l years
         1mo 1d 14h 18m ago
 
     Rounding is time zone aware. For example, most days are 24 hours, and so
     rounding 11.75h to the nearest day for most days will result in a zero
     span:
 
-        $ biff span round -s day -r '2025-03-10[America/New_York]' 11.75h
+        $ bttf span round -s day -r '2025-03-10[America/New_York]' 11.75h
         0s
 
     But 2025-03-09 in New York was only 23 hours. So rounding 11.75h to
     the nearest day will actually round up:
 
-        $ biff span round -s day -r '2025-03-09[America/New_York]' 11.75h
+        $ bttf span round -s day -r '2025-03-09[America/New_York]' 11.75h
         1d
 
     %snip-end%

@@ -22,7 +22,7 @@ By default, time zone transitions are shown that occur after the current time.
 To change this reference point, use the `-r/--relative` flag.
 
 USAGE:
-    biff tz seq <time-zone>
+    bttf tz seq <time-zone>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -30,7 +30,7 @@ TIP:
 EXAMPLES:
     Show the next 5 time zone transitions in Sydney:
 
-        $ biff tz seq -c5 Australia/Sydney
+        $ bttf tz seq -c5 Australia/Sydney
         2025-10-05T03:00:00+11:00[Australia/Sydney]
         2026-04-05T02:00:00+10:00[Australia/Sydney]
         2026-10-04T03:00:00+11:00[Australia/Sydney]
@@ -42,7 +42,7 @@ EXAMPLES:
     Notice that in the example above, the datetimes are printed the time zone
     requested. You can of course switch them to your system's time zone:
 
-        $ biff tz seq -c5 Australia/Sydney | biff time in system
+        $ bttf tz seq -c5 Australia/Sydney | bttf time in system
         2025-10-04T12:00:00-04:00[America/New_York]
         2026-04-04T12:00:00-04:00[America/New_York]
         2026-10-03T12:00:00-04:00[America/New_York]
@@ -65,8 +65,8 @@ be "missing" in common circumstances, such as for fixed offset time zones or
 for time zones that have no daylight saving time.
 
 USAGE:
-    biff tz next <time-zone> <datetime>...
-    biff tz next <time-zone> < line delimited <datetime>
+    bttf tz next <time-zone> <datetime>...
+    bttf tz next <time-zone> < line delimited <datetime>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -74,7 +74,7 @@ TIP:
 EXAMPLES:
     Find the next time the time zone offset changes in New York:
 
-        $ biff tz next America/New_York now
+        $ bttf tz next America/New_York now
 
     %snip-start%
 
@@ -82,12 +82,12 @@ EXAMPLES:
     transitions after a datetime" to "find transitions after or at a datetime."
     For example, without it:
 
-        $ biff tz next America/New_York 2025-03-09T03:00-04
+        $ bttf tz next America/New_York 2025-03-09T03:00-04
         2025-11-02T01:00:00-05:00[America/New_York]
 
     But with it:
 
-        $ biff tz next -i America/New_York 2025-03-09T03:00-04
+        $ bttf tz next -i America/New_York 2025-03-09T03:00-04
         2025-03-09T03:00:00-04:00[America/New_York]
 
     %snip-end%
@@ -106,8 +106,8 @@ be "missing" in common circumstances, such as for fixed offset time zones or
 for time zones that have no daylight saving time.
 
 USAGE:
-    biff tz prev <time-zone> <datetime>...
-    biff tz prev <time-zone> < line delimited <datetime>
+    bttf tz prev <time-zone> <datetime>...
+    bttf tz prev <time-zone> < line delimited <datetime>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -115,7 +115,7 @@ TIP:
 EXAMPLES:
     Find the previous time the time zone offset changed in New York:
 
-        $ biff tz prev America/New_York now
+        $ bttf tz prev America/New_York now
 
     %snip-start%
 
@@ -123,12 +123,12 @@ EXAMPLES:
     transitions before a datetime" to "find transitions before or at a
     datetime." For example, without it:
 
-        $ biff tz prev America/New_York 2025-03-09T03:00-04
+        $ bttf tz prev America/New_York 2025-03-09T03:00-04
         2024-11-03T01:00:00-05:00[America/New_York]
 
     But with it:
 
-        $ biff tz prev -i America/New_York 2025-03-09T03:00-04
+        $ bttf tz prev -i America/New_York 2025-03-09T03:00-04
         2025-03-09T03:00:00-04:00[America/New_York]
 
     %snip-end%
@@ -145,7 +145,7 @@ const INCLUSIVE: Usage = Usage::flag(
 Include time zone transitions equal to the given datetimes.
 
 By default, this command always returns a transition that is strictly greater
-(for `biff tz next`) or strictly less than (for `biff tz prev`) than the given
+(for `bttf tz next`) or strictly less than (for `bttf tz prev`) than the given
 datetimes. When this flag is given, the command is permitted to return
 transitions that are greater than or equal or less than or equal to the given
 datetimes.
@@ -159,8 +159,8 @@ const NTH: Usage = Usage::flag(
 Returns the nth time zone transition after the given datetimes.
 
 The value given must be greater than zero. A value of 1 is the default and
-means the first time zone transition after (for `biff tz next`) or before (for
-`biff tz prev`) the given datetimes.
+means the first time zone transition after (for `bttf tz next`) or before (for
+`bttf tz prev`) the given datetimes.
 "#,
 );
 
@@ -170,7 +170,7 @@ const COUNT: Usage = Usage::flag(
     r#"
 Shows only the next (or previous) N transitions.
 
-The value may be zero. By default, all transitions before Biff's maximum
+The value may be zero. By default, all transitions before bttf's maximum
 datetime (or after tzdb's minimum transition when `-p/--past` is given) are
 shown.
 "#,

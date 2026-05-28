@@ -1,7 +1,7 @@
 use crate::command::assert_cmd_snapshot;
 
 fn parse() -> crate::command::Command {
-    crate::biff(["time", "parse"])
+    crate::bttf(["time", "parse"])
 }
 
 /// Test that we can parse datetimes positionally or on stdin.

@@ -16,13 +16,13 @@ use crate::{
 const USAGE: &'static str = r#"
 Untag tagged data.
 
-This effectively undoes any "tagging" done by the `biff tag` commands. This
+This effectively undoes any "tagging" done by the `bttf tag` commands. This
 is useful to get back the original data, or even to replace tagged values in
 the original data.
 
 USAGE:
-    biff untag <path>
-    biff untag < line delimited tagged data
+    bttf untag <path>
+    bttf untag < line delimited tagged data
 
 TIP:
     use -h for short docs and --help for long docs
@@ -32,9 +32,9 @@ EXAMPLES:
     display such that the datetime is included with the file path:
 
         git ls-files \
-            | biff tag exec git log -n1 --format='%cI' \
-            | biff time sort \
-            | biff untag -f '{tag} {data}'
+            | bttf tag exec git log -n1 --format='%cI' \
+            | bttf time sort \
+            | bttf untag -f '{tag} {data}'
 
     %snip-start%
 
@@ -48,13 +48,13 @@ EXAMPLES:
         Liskov	Europe/Kyiv
         Goldberg	Australia/Tasmania
 
-    With Biff's tagging feature, one can very easily query the current time
+    With bttf's tagging feature, one can very easily query the current time
     for each of your co-workers and format it into easily readable output:
 
-        $ biff tag lines --auto timezone time-zones \
-            | biff time in now \
-            | biff time fmt -f '%Y-%m-%d %H:%M %Z' \
-            | biff untag -f '{data}\t{tag}' \
+        $ bttf tag lines --auto timezone time-zones \
+            | bttf time in now \
+            | bttf time fmt -f '%Y-%m-%d %H:%M %Z' \
+            | bttf untag -f '{data}\t{tag}' \
             | tabwriter
         Hopper    America/New_York    2025-03-29 12:56 EDT
         Lovelace  Asia/Kolkata        2025-03-29 22:26 IST
@@ -67,10 +67,10 @@ EXAMPLES:
     Or replace RFC 3339 UTC timestamps in a Caddy log file with datetimes in
     your time zone:
 
-        $ biff tag lines access.log \
-            | biff time in system \
-            | biff time fmt -f '%Y-%m-%d %H:%M:%S' \
-            | biff untag -s
+        $ bttf tag lines access.log \
+            | bttf time in system \
+            | bttf time fmt -f '%Y-%m-%d %H:%M:%S' \
+            | bttf untag -s
 
     %snip-end%
 REQUIRED ARGUMENTS:
@@ -339,7 +339,7 @@ original data it was extracted from. For example, this range is created by the
 `bigg tag lines` command.
 
 This is useful when one extracts a datetime tag and turns it into a different
-format with, e.g., `biff time fmt`. This flag will then substitute the original
+format with, e.g., `bttf time fmt`. This flag will then substitute the original
 datetime in the source with the formatted datetime. For example, this can be
 used to localize RFC 3339 Zulu timestamps in arbitrary line oriented data.
 "#,

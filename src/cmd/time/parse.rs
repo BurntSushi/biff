@@ -19,12 +19,12 @@ environment variable.)
 
 By default, this only parses RFC 9557 timestamps. For example,
 `2025-05-01T17:30-04[America/New_York]`. To accept a more flexible format
-used by Biff for datetimes passed on the CLI, including relative datetimes,
+used by bttf for datetimes passed on the CLI, including relative datetimes,
 use `-f flexible`.
 
 USAGE:
-    biff time parse <string>...
-    biff time parse < line delimited <string>
+    bttf time parse <string>...
+    bttf time parse < line delimited <string>
 
 TIP:
     use -h for short docs and --help for long docs
@@ -32,26 +32,26 @@ TIP:
 EXAMPLES:
     Parse an "American" date with the month first and two digits for the year:
 
-        $ biff time parse -f '%m/%d/%y' 03/15/25
+        $ bttf time parse -f '%m/%d/%y' 03/15/25
 
     %snip-start%
 
     Parse a datetime with an IANA time zone identifier (not commonly supported
     among other `strptime` implementations):
 
-        $ biff time parse -f '%Y-%m-%d %Q' '2025-03-15 Australia/Tasmania'
+        $ bttf time parse -f '%Y-%m-%d %Q' '2025-03-15 Australia/Tasmania'
 
     Parse a Unix timestamp, in seconds:
 
-        $ biff time parse -f '%s' 999999999
+        $ bttf time parse -f '%s' 999999999
 
     Parse an ISO 8601 week date in your local time:
 
-        $ biff time parse -f '%G-W%V-%u' 2025-W12-1
+        $ bttf time parse -f '%G-W%V-%u' 2025-W12-1
 
     Parse a relative datetime from stdin:
 
-        $ echo '1 hour ago' | biff time parse -f flexible
+        $ echo '1 hour ago' | bttf time parse -f flexible
 
     %snip-end%
 REQUIRED ARGUMENTS:
@@ -125,7 +125,7 @@ impl args::Configurable for Config {
 Ignore strings that don't parse in the requested format.
 
 When enabled, these strings are dropped and parsing continues to the next
-input. To see error messages, enable logging with `BIFF_LOG=warn`. When
+input. To see error messages, enable logging with `BTTF_LOG=warn`. When
 disabled, if parsing fails, then execution stops and an error is printed.
 "#,
         );
