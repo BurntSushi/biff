@@ -1046,12 +1046,12 @@ bttf 0.1.0 (rev 2659045dba) (locale support enabled)
 ```
 
 If you don't see "locale support enabled" in the output, then that means your
-bttf installation cannot localize datetimes. To fix that, either rebuild bttf
-with the `locale` feature enabled, or use one of the binaries distributed on
-GitHub. If you installed bttf from a package manager, then you'll need to ask
-them to rebuild bttf with locale support enabled.
+bttf installation cannot localize datetimes. To fix that, rebuild bttf with
+default features enabled, or use one of the binaries distributed on GitHub. If
+you installed bttf from a package manager, then you'll need to ask them to
+rebuild bttf with locale support enabled.
 
-(Note that when bttf is compiled with the `locale` feature, all necessary
+(Note that locale support is enabled by default. When enabled, all necessary
 localization data is bundled into the binary. This increases the binary size
 of bttf substantially.)
 

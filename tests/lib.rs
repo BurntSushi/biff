@@ -58,7 +58,7 @@ fn bttf_bare() -> crate::command::Command {
     crate::command::bin("bttf")
         .env("TZ", "America/New_York")
         .env("BTTF_NOW", NOW.to_string())
-        // So that when tests are run with `--features locale`,
+        // So that when tests are run with locale support,
         // we still get consistent behavior as if bttf were
         // compiled without locale support.
         .env("BTTF_LOCALE", "und")

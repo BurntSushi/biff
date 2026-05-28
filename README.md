@@ -27,9 +27,8 @@ Sat, May 10, 2025, 8:02:04 AM EDT
 
 > [!TIP]
 > If you get output like `2025 M05 10, Mon 08:02:04` instead, that's because
-> you likely don't have [locale support][locale] support configured. That
-> requires setting `BTTF_LOCALE` and using a GitHub release binary or building
-> bttf with the `locale` feature enabled.
+> you likely don't have [locale support][locale] support configured. Enabling
+> locale support requires setting `BTTF_LOCALE` in your shell environment.
 
 Print the current time in a format of your choosing:
 
@@ -206,13 +205,15 @@ reduce the file size, run `strip` on the binary.
 cargo install bttf
 ```
 
-Or, if you want [locale support][locale] (which is enabled in the
-binaries distributed on GitHub), then install with the `locale` feature
-enabled:
+Or, if you want to disable [locale support][locale], install without default
+features:
 
 ```console
-cargo install bttf --features locale
+cargo install bttf --no-default-features
 ```
+
+The benefit of disabling locale support is faster compile times and a smaller
+`bttf` binary.
 
 ### bttf as a library
 
@@ -276,11 +277,11 @@ cargo build --release
 ./target/release/bttf --version
 ```
 
-Additionally, optional locale support can be built with bttf by enabling the
-`locale` feature:
+Locale support is enabled by default. To build without it, disable default
+features:
 
 ```console
-cargo build --release --features locale
+cargo build --release --no-default-features
 ```
 
 bttf can be built with the musl target on Linux by first installing the musl
@@ -293,7 +294,7 @@ rustup target add x86_64-unknown-linux-musl
 cargo build --release --target x86_64-unknown-linux-musl
 ```
 
-Applying the `--features locale` flag from above should also work.
+Applying the `--no-default-features` flag from above should also work.
 
 ### Running tests
 
