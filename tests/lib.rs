@@ -88,6 +88,141 @@ fn no_args() {
     );
 }
 
+/// Test that `--help` and `-h` print usage to stdout and exit successfully,
+/// both at the top level and on a command group.
+#[test]
+fn help() {
+    crate::command::assert_cmd_snapshot!(
+        bttf(["--help"]),
+        @r"
+    success: true
+    exit_code: 0
+    ----- stdout -----
+    A simple utility for doing datetime arithmetic, parsing and formatting.
+
+    USAGE:
+        bttf <command> ...
+
+    COMMANDS:
+        span   Tools for manipulating time spans/durations
+        time   Tools for manipulating datetimes
+        tag    Tag arbitrary data with datetimes or spans
+        tz     Commands for working directly with time zones
+        untag  Remove tags from previously tagged data
+
+    ----- stderr -----
+    ",
+    );
+    crate::command::assert_cmd_snapshot!(
+        bttf(["-h"]),
+        @r"
+    success: true
+    exit_code: 0
+    ----- stdout -----
+    A simple utility for doing datetime arithmetic, parsing and formatting.
+
+    USAGE:
+        bttf <command> ...
+
+    COMMANDS:
+        span   Tools for manipulating time spans/durations
+        time   Tools for manipulating datetimes
+        tag    Tag arbitrary data with datetimes or spans
+        tz     Commands for working directly with time zones
+        untag  Remove tags from previously tagged data
+
+    ----- stderr -----
+    ",
+    );
+    crate::command::assert_cmd_snapshot!(
+        bttf(["time", "--help"]),
+        @r"
+    success: true
+    exit_code: 0
+    ----- stdout -----
+    Commands for working with datetimes.
+
+    USAGE:
+        bttf time <command> ...
+
+    COMMANDS:
+        add       Add a span to a datetime
+        cmp       Compare datetimes
+        end-of    Get the end of a year, month, week, etc
+        fmt       Format a datetime
+        in        Convert a datetime to a time zone
+        parse     Parse a datetime
+        relative  Parse a relative datetime
+        round     Round a datetime
+        seq       Generate a sequence of datetimes
+        sort      Sort datetimes
+        start-of  Get the start of a year, month, week, etc
+
+    ----- stderr -----
+    ",
+    );
+}
+
+/// Test that `--version` prints the version to stdout and exits successfully
+/// at the top level, on a command group, and on a leaf command. The version
+/// line embeds the crate version and git hash, so it is filtered to a stable
+/// placeholder.
+#[test]
+fn version() {
+    insta::with_settings!({
+        filters => vec![(r"bttf \d+\.\d+\.\d+.*", "bttf [VERSION]")],
+    }, {
+        crate::command::assert_cmd_snapshot!(
+            bttf(["--version"]),
+            @r"
+        success: true
+        exit_code: 0
+        ----- stdout -----
+        bttf [VERSION]
+
+        ----- stderr -----
+        ",
+        );
+        crate::command::assert_cmd_snapshot!(
+            bttf(["time", "--version"]),
+            @r"
+        success: true
+        exit_code: 0
+        ----- stdout -----
+        bttf [VERSION]
+
+        ----- stderr -----
+        ",
+        );
+        crate::command::assert_cmd_snapshot!(
+            bttf(["time", "fmt", "--version"]),
+            @r"
+        success: true
+        exit_code: 0
+        ----- stdout -----
+        bttf [VERSION]
+
+        ----- stderr -----
+        ",
+        );
+        // We also test the case where `--version` is added after a command
+        // argument. This previously failed because we weren't checking for
+        // the `--version` flag in all cases (like we do for `--help`). I don't
+        // think this was intentional.
+        crate::command::assert_cmd_snapshot!(
+            bttf(["time", "fmt", "now", "--version"]),
+            @r"
+        success: true
+        exit_code: 0
+        ----- stdout -----
+        bttf [VERSION]
+
+        ----- stderr -----
+        ",
+        );
+    });
+}
+
 /// Test that calling `bttf` when compiled with `locale` and when `BTTF_LOCALE`
 /// is set does something sensible.
 #[cfg(feature = "locale")]
