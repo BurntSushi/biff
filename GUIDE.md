@@ -973,7 +973,7 @@ Sun, Nov 2, 2025, 1:30:00 AM EST
 ```
 
 Daylight saving time is account for when doing arithmetic as well. For example,
-consider the diference between adding 1 day and 24 hours when that span crosses
+consider the difference between adding 1 day and 24 hours when that span crosses
 a time zone transition. First, let's look at a gap:
 
 ```console
