@@ -60,11 +60,11 @@ pub fn run(p: &mut lexopt::Parser) -> anyhow::Result<()> {
         writeln!(wtr, "Etc/Unknown")?;
         return Ok(());
     }
-    if let Some(iana) = tz.iana_name() {
-        if tz.to_fixed_offset().is_err() {
-            writeln!(wtr, "{iana}")?;
-            return Ok(());
-        }
+    if let Some(iana) = tz.iana_name()
+        && tz.to_fixed_offset().is_err()
+    {
+        writeln!(wtr, "{iana}")?;
+        return Ok(());
     }
     for id in timezone::available() {
         let candidate = jiff::tz::TimeZone::get(id)?;

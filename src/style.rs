@@ -120,15 +120,15 @@ fn tty_stderr() -> bool {
 /// Whether colors have been globally disabled or not.
 fn can_use_colors() -> bool {
     static YES: LazyLock<bool> = LazyLock::new(|| {
-        if let Some(v) = std::env::var_os("NO_COLOR") {
-            if !v.is_empty() {
-                return false;
-            }
+        if let Some(v) = std::env::var_os("NO_COLOR")
+            && !v.is_empty()
+        {
+            return false;
         }
-        if let Some(v) = std::env::var_os("TERM") {
-            if v == std::ffi::OsStr::new("dumb") {
-                return false;
-            }
+        if let Some(v) = std::env::var_os("TERM")
+            && v == std::ffi::OsStr::new("dumb")
+        {
+            return false;
         }
         true
     });

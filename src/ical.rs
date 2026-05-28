@@ -1417,15 +1417,15 @@ impl RecurrenceSet {
                 continue;
             }
             // For similar reasons, we handle our "until" constraint here too.
-            if let Some(ref until) = rule.inner.zoned_until {
-                if &next > until {
-                    // Since we always move forward in time, if we reach
-                    // this point, we'll never be able to return any other
-                    // datetime. So we can drain the rest of the set and
-                    // bail.
-                    self.clear();
-                    return None;
-                }
+            if let Some(ref until) = rule.inner.zoned_until
+                && &next > until
+            {
+                // Since we always move forward in time, if we reach
+                // this point, we'll never be able to return any other
+                // datetime. So we can drain the rest of the set and
+                // bail.
+                self.clear();
+                return None;
             }
             return Some(next);
         }

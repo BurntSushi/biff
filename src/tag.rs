@@ -76,10 +76,8 @@ where
         // In theory this heuristic could be wrong some times. For example,
         // if a raw untagged value begins with a `{` and is invalid. But that
         // should be very rare.
-        if probably_json {
-            if let Some(err) = json_decoding_err {
-                return Err(err);
-            }
+        if probably_json && let Some(err) = json_decoding_err {
+            return Err(err);
         }
         Err(anyhow::Error::msg(raw_err))
     }

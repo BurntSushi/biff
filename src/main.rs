@@ -106,21 +106,20 @@ fn main() -> ExitCode {
     // the unhandled signal causes the process to unceremoniously
     // terminate.
     for cause in err.chain() {
-        if let Some(err) = cause.downcast_ref::<std::io::Error>() {
-            if err.kind() == std::io::ErrorKind::BrokenPipe {
-                return ExitCode::from(0);
-            }
+        if let Some(err) = cause.downcast_ref::<std::io::Error>()
+            && err.kind() == std::io::ErrorKind::BrokenPipe
+        {
+            return ExitCode::from(0);
         }
         // `serde_json` for whatever reason swallows any
         // `std::io::Error` it may hit when serializing JSON
         // via `to_writer`. So to deal with broken pipe errors,
         // we need to explicitly check it.
-        if let Some(err) = cause.downcast_ref::<serde_json::Error>() {
-            if let Some(kind) = err.io_error_kind() {
-                if kind == std::io::ErrorKind::BrokenPipe {
-                    return ExitCode::from(0);
-                }
-            }
+        if let Some(err) = cause.downcast_ref::<serde_json::Error>()
+            && let Some(kind) = err.io_error_kind()
+            && kind == std::io::ErrorKind::BrokenPipe
+        {
+            return ExitCode::from(0);
         }
     }
     if std::env::var("RUST_BACKTRACE").map_or(false, |v| v == "1")

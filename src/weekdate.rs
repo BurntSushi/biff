@@ -75,10 +75,10 @@ impl WeekDate {
             // But by the same token, in that case, `date` will never be
             // greater than or equal to the start of that year. So we can just
             // ignore it.
-            if let Ok(next_start_of_year) = week_start_of_year(start, next) {
-                if date >= next_start_of_year {
-                    start_of_year = next_start_of_year;
-                }
+            if let Ok(next_start_of_year) = week_start_of_year(start, next)
+                && date >= next_start_of_year
+            {
+                start_of_year = next_start_of_year;
             }
         }
 
