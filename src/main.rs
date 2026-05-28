@@ -93,6 +93,10 @@ fn main() -> ExitCode {
         writeln!(&mut std::io::stdout(), "{help}").unwrap();
         return ExitCode::SUCCESS;
     }
+    if let Some(version) = err.root_cause().downcast_ref::<args::Version>() {
+        writeln!(&mut std::io::stdout(), "{version}").unwrap();
+        return ExitCode::SUCCESS;
+    }
     // Look for a broken pipe error. In this case, we generally want
     // to exit "gracefully" with a success exit code. This matches
     // existing Unix convention. We need to handle this explicitly

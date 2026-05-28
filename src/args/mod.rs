@@ -85,6 +85,9 @@ pub fn configure(
                     usage.trim().to_string(),
                 )));
             }
+            Arg::Long("version") => {
+                return Err(anyhow::Error::from(Version));
+            }
             _ => {}
         }
         // We do this little dance to disentangle the lifetime of 'p' from the
@@ -184,7 +187,7 @@ pub fn next_as_command(usage: &str, p: &mut Parser) -> anyhow::Result<String> {
     let cmd = match arg {
         Arg::Value(cmd) => cmd.string()?,
         Arg::Short('h') | Arg::Long("help") => {
-            anyhow::bail!("{}", Help(usage.to_string()))
+            return Err(anyhow::Error::from(Help(usage.to_string())));
         }
         Arg::Long("version") => return Err(anyhow::Error::from(Version)),
         arg => return Err(arg.unexpected().into()),
