@@ -33,6 +33,7 @@ name = "bttf"
 path = "src/main.rs"
 
 [features]
+default = ["locale"]
 locale = [
   "dep:icu_calendar",
   "dep:icu_datetime",

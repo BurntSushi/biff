@@ -147,8 +147,8 @@ jobs:
     - name: Run tests
       run: ${{ env.CARGO }} test --verbose ${{ env.TARGET_FLAGS }}
 
-    - name: Run tests with locale support
-      run: ${{ env.CARGO }} test --verbose --features locale ${{ env.TARGET_FLAGS }}
+    - name: Run tests without locale support
+      run: ${{ env.CARGO }} test --verbose --no-default-features ${{ env.TARGET_FLAGS }}
 
   rustfmt:
     runs-on: ubuntu-latest
