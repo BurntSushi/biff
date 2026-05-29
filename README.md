@@ -16,6 +16,9 @@ concepts that bttf deals with. Otherwise, consult `bttf --help` or
 Alternatively, there is a [comparison] between other similar tools that might
 give you a quick sense of what bttf is like.
 
+> [!TIP]
+> This project was initially named Biff. It has been renamed to bttf.
+
 ### Brief Examples
 
 Print the current time:
