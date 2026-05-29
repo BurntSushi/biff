@@ -290,3 +290,43 @@ fn no_args_locale() {
     ",
     );
 }
+
+/// Test that calling `bttf` when compiled with `locale` and without
+/// `BTTF_LOCALE` set discovers a POSIX locale from the environment.
+#[cfg(feature = "locale")]
+#[test]
+fn no_args_posix_locale() {
+    let cmd = bttf_bare()
+        .env_remove("BTTF_LOCALE")
+        .env_remove("LC_ALL")
+        .env("LC_TIME", "en_GB.UTF-8")
+        .env_remove("LANG");
+    crate::command::assert_cmd_snapshot!(
+        cmd,
+        @r"
+    success: true
+    exit_code: 0
+    ----- stdout -----
+    Sat, 20 Jul 2024, 16:30:55 GMT-4
+
+    ----- stderr -----
+    ",
+    );
+
+    let cmd = bttf_bare()
+        .env("BTTF_LOCALE", "en-US")
+        .env("LC_ALL", "en_GB.UTF-8")
+        .env("LC_TIME", "fr_FR.UTF-8")
+        .env("LANG", "th_TH.UTF-8");
+    crate::command::assert_cmd_snapshot!(
+        cmd,
+        @r"
+    success: true
+    exit_code: 0
+    ----- stdout -----
+    Sat, Jul 20, 2024, 4:30:55 PM EDT
+
+    ----- stderr -----
+    ",
+    );
+}

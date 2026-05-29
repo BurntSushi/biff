@@ -63,14 +63,32 @@ static LOCALE: LazyLock<Locale> = LazyLock::new(|| {
             );
             locale
         }
-        Ok(None) => {
-            let locale = Locale::unknown();
-            log::trace!(
-                "`BTTF_LOCALE` environment variable not set, using \
-                 `unknown` locale",
-            );
-            locale
-        }
+        Ok(None) => match read_env_posix_locale() {
+            Ok(Some((name, locale))) => {
+                log::trace!(
+                    "`BTTF_LOCALE` environment variable not set, \
+                         setting locale to `{locale}` from POSIX `{name}` \
+                         environment variable",
+                );
+                locale
+            }
+            Ok(None) => {
+                let locale = Locale::unknown();
+                log::trace!(
+                    "`BTTF_LOCALE` environment variable not set and no \
+                         POSIX locale found, using `unknown` locale",
+                );
+                locale
+            }
+            Err(err) => {
+                let locale = Locale::unknown();
+                log::warn!(
+                    "reading POSIX locale failed, using unknown locale \
+                         `{locale}`: {err:#}",
+                );
+                locale
+            }
+        },
         Err(err) => {
             let locale = Locale::unknown();
             log::warn!(
@@ -181,4 +199,23 @@ fn read_env_bttf_locale() -> anyhow::Result<Option<Locale>> {
         format!("failed to parse `BTTF_LOCALE` environment variable")
     })?;
     Ok(Some(locale))
+}
+
+fn read_env_posix_locale() -> anyhow::Result<Option<(&'static str, Locale)>> {
+    for name in ["LC_ALL", "LC_TIME", "LANG"] {
+        let Some(val) = std::env::var_os(name) else { continue };
+        if val.is_empty() {
+            continue;
+        }
+        let Some(val) = val.to_str() else {
+            anyhow::bail!(
+                "`{name}` environment variable is not valid UTF-8: {val:?}"
+            )
+        };
+        let locale = Locale::from_posix(val).with_context(|| {
+            format!("failed to parse `{name}` environment variable")
+        })?;
+        return Ok(Some((name, locale)));
+    }
+    Ok(None)
 }

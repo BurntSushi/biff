@@ -1035,7 +1035,9 @@ Pacific/Niue
 ## Localization
 
 bttf has some rudimentary support for localizing datetimes as prescribed by
-Unicode. bttf specifically does not and will never support [POSIX locales].
+Unicode. bttf specifically does not and will never support [POSIX locales],
+but it can convert common POSIX locale names from your environment to Unicode
+locale identifiers.
 
 First and foremost is checking whether your installation of bttf has locale
 support enabled:
@@ -1055,10 +1057,11 @@ rebuild bttf with locale support enabled.
 localization data is bundled into the binary. This increases the binary size
 of bttf substantially.)
 
-When locale support is enabled, you'll need to set a locale. At present, bttf
-doesn't try to discover your system's locale automatically. Instead, it can
-only be set with through the `BTTF_LOCALE` environment variable. Here are
-some examples:
+When locale support is enabled, bttf will use the POSIX locale set by your
+environment. It checks `LC_ALL`, `LC_TIME` and `LANG`, in that order, and
+converts names like `en_US.UTF-8` to Unicode locale identifiers like `en-US`.
+You can override the detected locale with the `BTTF_LOCALE` environment
+variable. Here are some examples:
 
 ```console
 $ BTTF_LOCALE=en-US bttf
@@ -1139,11 +1142,8 @@ $ BTTF_LOCALE=en-US-u-ca-hebrew bttf
 Fri, 4 Iyar 5785, 2:42:07 PM EDT
 ```
 
-In the future, bttf may support detecting your system's locale for you
-automatically. This is blocked on [ICU4X support for querying this
-information][ICU4X system language]. Nevertheless, `BTTF_LOCALE` will always
-work to override the system locale and will likely be necessary for accessing
-the full expressivity of Unicode Locale Identifiers.
+`BTTF_LOCALE` will always override the system locale and will likely be
+necessary for accessing the full expressivity of Unicode Locale Identifiers.
 
 
 [POSIX locales]: https://github.com/mpv-player/mpv/commit/1e70e82baa9193f6f027338b0fab0f5078971fbe
@@ -1151,7 +1151,6 @@ the full expressivity of Unicode Locale Identifiers.
 [Picking the Right Language Code]: https://cldr.unicode.org/index/cldr-spec/picking-the-right-language-code
 [Unicode Utility BCP47]: https://util.unicode.org/UnicodeJsps/languageid.jsp
 [Using Language Identifiers]: http://www.i18nguy.com/unicode/language-identifiers.html
-[ICU4X system language]: https://github.com/unicode-org/icu4x/issues/3990
 [fmt::friendly]: https://docs.rs/jiff/latest/jiff/fmt/friendly/index.html
 [localization]: #localization
 [JSON lines]: https://jsonlines.org/

@@ -6,6 +6,10 @@ impl Locale {
         Locale(())
     }
 
+    pub fn from_posix(_: &str) -> anyhow::Result<Locale> {
+        Ok(Locale::unknown())
+    }
+
     pub fn to_formatter(&self) -> anyhow::Result<StrtimeLocaleFormatter> {
         Ok(jiff::fmt::strtime::DefaultCustom::new())
     }

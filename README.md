@@ -234,8 +234,8 @@ been warned.
 
 Also, no compatibility with `date` is intended. This is not a drop-in
 replacement. It is not intended to be. It never will be. And it doesn't give
-a hoot about POSIX (other than the `TZ` environment variable). If you need a
-`date` compatible program, then go use an implementation of POSIX `date`.
+a hoot about POSIX (other than the `TZ` and locale environment variables). If
+you need a `date` compatible program, then go use an implementation of POSIX `date`.
 With that said, bttf's `bttf time fmt` command generally supports a `strftime`
 syntax that has a large amount of compatibility with GNU `date`.
 

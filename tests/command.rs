@@ -309,7 +309,7 @@ impl Command {
 
     /// Remove an environment variable (also prevents inheriting from the
     /// parent process).
-    #[expect(dead_code)]
+    #[cfg_attr(not(feature = "locale"), expect(dead_code))]
     pub fn env_remove(mut self, key: impl AsRef<OsStr>) -> Command {
         self.envs.push(EnvAction::Remove(key.as_ref().to_os_string()));
         self
@@ -385,6 +385,7 @@ enum EnvAction {
     /// Maps to `std::process::Command::env`.
     Set(OsString, OsString),
     /// Maps to `std::process::Command::env_remove`.
+    #[cfg_attr(not(feature = "locale"), expect(dead_code))]
     Remove(OsString),
     /// Maps to `std::process::Command::env_clear`.
     Clear,

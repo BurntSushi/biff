@@ -33,6 +33,12 @@ impl Locale {
         Locale(IcuLocale::UNKNOWN)
     }
 
+    /// Create a locale from a POSIX locale name.
+    pub fn from_posix(posix: &str) -> anyhow::Result<Locale> {
+        let langid = posix_to_unicode_language_identifier(posix)?;
+        langid.parse()
+    }
+
     /// Create a formatter that implements Jiff's `strtime::Locale` trait.
     pub fn to_formatter(&self) -> anyhow::Result<StrtimeLocaleFormatter> {
         let zone = ZoneFieldSet::SpecificShort(SpecificShort);
@@ -63,6 +69,20 @@ impl Locale {
 
         Ok(StrtimeLocaleFormatter { datetime, date, time, time12 })
     }
+}
+
+fn posix_to_unicode_language_identifier(
+    posix: &str,
+) -> anyhow::Result<String> {
+    let name = posix.split_once('.').map_or(posix, |(name, _)| name);
+    let name = name.split_once('@').map_or(name, |(name, _)| name);
+    if name == "C" || name == "POSIX" {
+        return Ok("und".to_string());
+    }
+    if name.is_empty() {
+        anyhow::bail!("empty POSIX locale");
+    }
+    Ok(name.replace('_', "-"))
 }
 
 impl std::str::FromStr for Locale {
